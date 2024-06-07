@@ -2,6 +2,22 @@
 title: "About me"
 ---
 
-Add some text and a figure describing myself.
+Hello my name is Leo. 
 
-For details, see the exercise instructions. 
+I am not going to post a picture of myself.
+
+I graduated from UTSA with a bachelors in Business Analytics and Operations and Supply Chain Management.
+
+I was in the USAF.
+
+I currently work for the USAF as an electronics technician.
+
+Avid sports fan. My teams are the Dallas Cowboys, San Antonio Spurs, Chicago Blackhawks, Houston Astros. 
+
+I like to visit https://www.kaggle.com/ from time to time. See what kinds of different ways people are presenting different datasets.
+
+If you have any questions just ask. As you can tell, I'm an open book. 
+
+-leo
+
+
