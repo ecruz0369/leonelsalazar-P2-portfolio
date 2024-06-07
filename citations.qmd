@@ -1,0 +1,19 @@
+---
+title: "citations"
+---
+
+```{r}
+library(bibtex)
+```
+
+
+```{r}
+@website{HoneyBees,
+author = {Sara Zaske},
+title = {Honey bees at risk for colony collapse from longer, warmer fall seasons},
+url = {https://news.wsu.edu/press-release/2024/03/25/honey-bees-at-risk-for-colony-collapse-from-longer-warmer-fall-seasons/},
+organization = {WSU News & Media Relations},
+year = {2024}
+}
+```
+
