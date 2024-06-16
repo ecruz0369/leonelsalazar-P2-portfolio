@@ -32,17 +32,7 @@ Group Ten is pursuing the historical data collected by various public agencies t
 
 Honeybees have been nature's pollinators for centuries, with documented relationships with humans dating back to ancient Egyptians and Hindus. Historically, humans have maintained beehives, using honey as medicine in cultures such as the Egyptians, Assyrians, Chinese, Greeks, and Romans. The natural antibacterial properties of honey made it a valuable treatment for wounds, preventing infection, a practice used by Romans and Russians during World War I. Honeybees and other pollinators are critical for food production and nutritional security, yet bees face a variety of survival challenges. Currently, Varroa mites impact bee colonies and this mite infestation, a tiny red-brown parasite that can live on adult honeybees and reproduce on larvae and pupae in the developing brood. Another major threat is American Foulbrood Disease (AFB), caused by the bacterium Paenibacillus larvae. A disease that is fatal to honeybee larvae and found worldwide. The only effective control measure is to incinerate and destroy infected hives and live bees mitigating the infectious spread to other colonies. In addition, the exploration of climate change impacting honeybee colony losses has only recently been researched. While there are correlations between higher winter temperatures and greater colony losses, the effects of warmer autumn and winter temperatures on colony population dynamics and age structure as potential causes of reduced colony survival have not yet been fully investigated.<https://usda.library.cornell.edu/catalog?f%5Bkeywords_sim%5D%5B%5D=honey+bees&locale=en>, <https://www.nass.usda.gov/Surveys/Guide_to_NASS_Surveys/Bee_and_Honey/>
 
-## General Background Information
 
-*Provide enough background on your topic that others can understand the why and how of your analysis*
-
-## Description of data and data source
-
-*Describe what the data is, what it contains, where it is from, etc. Eventually this might be part of a methods section.*
-
-## Questions/Hypotheses to be addressed
-
-*State the research questions you plan to answer with this analysis.*
 
 To cite other work (important everywhere, but likely happens first in introduction), make sure your references are in the bibtex file specified in the YAML header above and have the right bibtex key. Then you can include like this:
 
@@ -52,7 +42,7 @@ Examples of reproducible research projects can for instance be found in [@mckay2
 
 # Methods
 
-*Describe your methods. That should describe the data, the cleaning processes, and the analysis approaches. You might want to provide a shorter description here and all the details in the supplement.*
+
 
 ## Schematic of workflow
 
@@ -67,11 +57,78 @@ knitr::include_graphics(here("assets","antigen-recognition.png"))
 
 ## Data aquisition
 
-*As applicable, explain where and how you got the data. If you directly import the data from an online source, you can combine this section with the next.*
+** We found the data from the United States Department of Agriculture(USDA) website. We used the following websites as a resource to download the datasets. **
+<https://usda.library.cornell.edu/catalog?f%5Bkeywords_sim%5D%5B%5D=honey+bees&locale=en>, <https://www.nass.usda.gov/Surveys/Guide_to_NASS_Surveys/Bee_and_Honey/>
 
 ## Data import and cleaning
 
-*Write code that reads in the file and cleans it so it's ready for analysis. Since this will be fairly long code for most datasets, it might be a good idea to have it in one or several R scripts. If that is the case, explain here briefly what kind of cleaning/processing you do, and provide more details and well documented code somewhere (e.g. as supplement in a paper). All materials, including files that contain code, should be commented well so everyone can follow along.*
+
+```{r}
+library(readxl)
+library(tidyverse)
+
+
+```
+
+
+
+```{r}
+
+
+data <- read.csv("C:/Users/Leonel/Desktop/MSDA/MS Data Analytics/Current Class/DA 6833/Group Project/datasets/finley-bee-colony-statistical-data-from-1987-2017/Databystate.csv")
+
+
+```
+
+```{r}
+
+
+# Select all columns except 3, 6, and 9
+Data_Clean <- dplyr::select(data, -c(3, 6, 9))
+
+```
+
+```{r}
+
+# Output cleaned data file to a csv file.
+write.csv(Data_Clean, "C:/Users/Leonel/Desktop/MSDA/MS Data Analytics/Current Class/DA 6833/Group Project/Databystate_Clean.csv")
+
+
+
+
+```
+
+
+```{r}
+
+# filter
+
+# Filter for rows where "Loss" or "Deadout" is present in any column (case-insensitive)
+library(stringr)  # Load stringr package for regular expressions
+data_filtered <- Data_Clean[rowSums(sapply(data, grepl, pattern = c("Loss"), ignore.case = TRUE)) > 0, ]
+
+
+
+```
+
+
+```{r}
+
+# Output cleaned data file to a csv file.
+write.csv(Data_Clean, "C:/Users/Leonel/Desktop/MSDA/MS Data Analytics/Current Class/DA 6833/Group Project/Databystate_Filtered.csv")
+
+
+```
+
+
+
+
+
+```{r}
+
+```
+
+
 
 ## Statistical analysis
 
@@ -150,4 +207,4 @@ Note that this cited reference will show up at the end of the document, the refe
 
 {{< pagebreak >}}
 
-# References
+
