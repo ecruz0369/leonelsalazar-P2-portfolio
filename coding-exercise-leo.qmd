@@ -267,3 +267,71 @@ summary(fit2)
 #### Conclusion
 
 
+
+
+
+
+** Leonel Salazar  IGE436 **
+
+```{r}
+
+fit3 = lm(africadata2000$life_expectancy ~ africadata2000$gdp)
+summary(fit3)
+
+```
+
+
+```{r}
+
+fit4 = lm(africadata2000$life_expectancy ~ africadata2000$fertility)
+summary(fit4)
+
+```
+
+
+```{r}
+
+fit5 = lm(africadata2000$life_expectancy ~ africadata2000$region)
+summary(fit5)
+
+
+
+str(africadata2000)
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
