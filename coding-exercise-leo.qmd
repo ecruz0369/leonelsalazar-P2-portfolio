@@ -1,17 +1,14 @@
 ---
-title: "R Coding Exercise"
-author: ""
-date: "today"
-execute: 
-  warning: false
-  error: true
-format:
-  html:
-    theme: ""
+title: "Coding Exercise"
+author: "Leonel Salazar"
+format: docx
 ---
+
+
 
 ## Loading and Checking Data
 ### Import libraries
+
 ```{r}
 library(dslabs) # to import dataset
 library(tidyverse) # data aggregation
@@ -271,7 +268,7 @@ summary(fit2)
 
 
 
-** Leonel Salazar  IGE436 **
+** This section is contributed by Leonel Salazar  IGE436 **
 
 ```{r}
 
