@@ -1,0 +1,274 @@
+---
+title: "Coding Exercise"
+author: "Leonel Salazar"
+format: html
+---
+
+
+## Loading and Checking Data
+### Import libraries
+
+```{r}
+library(dslabs) # to import dataset
+library(tidyverse) # data aggregation
+library(dplyr) # data aggregation? 
+library(renv)
+library(caret)
+data("stars")
+```
+
+### Help Function
+```{r}
+help("stars")
+```
+
+### Data Structure Overview
+```{r}
+str(stars)
+```
+### Data Summary
+```{r}
+summary(stars)
+```
+### Class Functions - Object Determination
+```{r}
+class(stars)
+```
+
+
+
+### Star Type based on Magnitude
+```{r}
+Type_Magnitude = stars %>%
+  select(type, magnitude )
+head(Type_Magnitude)
+```
+
+### Stars Type and Magnitude Structure
+```{r}
+str(Type_Magnitude)
+```
+
+
+```{r}
+# Convert to factor (default order is alphabetical)
+Type_Magnitude$type <- as.factor(Type_Magnitude$type)
+
+str(Type_Magnitude)
+
+```
+
+
+### Stars Type and Magnitude data summary
+```{r}
+summary(Type_Magnitude)
+```
+### Stars by Type and Temp
+```{r}
+Type_Temp = stars %>%
+  select(type, temp)
+head(Type_Temp)
+```
+
+### Type Temp Data Structure
+```{r}
+Type_Temp$type <- as.factor(Type_Temp$type)
+
+# Convert to numeric
+Type_Temp$temp <- as.numeric(Type_Temp$temp)
+
+str(Type_Temp)
+
+
+```
+
+### Type Temp Data Summary
+```{r}
+summary(Type_Temp)
+```
+```{r}
+
+Mag_Temp = stars %>%
+  select(magnitude, temp)
+head(Mag_Temp)
+
+```
+
+### Histogram of variables
+
+```{r}
+
+hist(Type_Magnitude$magnitude)
+hist(Type_Temp$temp)
+
+```
+
+
+### Plotting
+### Star Magnitude as a function of Star temperature
+
+```{r}
+regression = lm(Mag_Temp$magnitude ~ Mag_Temp$temp)
+rsq <- function(x, y) summary(lm(Mag_Temp$magnitude ~ Mag_Temp$temp))$r.squared
+r_square = round(rsq(obs, mod), 3)
+# summary(regression)$coefficients - keep to sanity check
+coeff = round(summary(regression)$coefficients[2],3)
+y_int = round(summary(regression)$coefficients[1],3)
+plot(
+  Mag_Temp$magnitude,
+  Mag_Temp$temp,
+  main='Magnitude and temperature of star',
+  xlab='Magnitude',
+  ylab='Temperature',
+   col='lightblue', 
+   bg='black', 
+   pch = 21,
+)
+# rsq_str = expression(paste("r"^"2:"))
+rsq_str = "r2: "
+text(175, 75, paste0('y = ', coeff, 'x + ', y_int), cex=0.75)
+text(170, 70, paste0(rsq_str, r_square), cex=0.75)
+abline(
+  lm(
+    Mag_Temp$magnitude ~ Mag_Temp$temp),
+  col='red',
+  lwd=1.75)
+```
+
+
+
+```{r}
+
+fit1 = lm(Mag_Temp$magnitude ~ Mag_Temp$temp)
+summary(fit1)
+
+
+```
+*** Based on this analysis, there's a statistically significant negative linear relationship between "temp" and "magnitude" in the "Mag_Temp" data. The model explains about 40% of the variance in "magnitude.  ***
+
+
+
+```{r}
+regression2 = lm(Type_Magnitude$magnitude ~ Type_Magnitude$type)
+rsq <- function(x, y) summary(lm(Type_Magnitude$magnitude ~ Type_Magnitude$type))$r.squared
+r_square = round(rsq(obs, mod), 3)
+# summary(regression)$coefficients - keep to sanity check
+coeff = round(summary(regression)$coefficients[2],3)
+y_int = round(summary(regression)$coefficients[1],3)
+plot(
+  Type_Magnitude$magnitude,
+  Type_Magnitude$type,
+  main='Magnitude by type of star',
+  xlab='Magnitude',
+  ylab='Type',
+   col='lightblue', 
+   bg='black', 
+   pch = 21,
+)
+# rsq_str = expression(paste("r"^"2:"))
+rsq_str = "r2: "
+text(175, 75, paste0('y = ', coeff, 'x + ', y_int), cex=0.75)
+text(170, 70, paste0(rsq_str, r_square), cex=0.75)
+abline(
+  lm(
+    Type_Magnitude$magnitude ~ Type_Magnitude$type),
+  col='red',
+  lwd=1.75)
+
+
+```
+
+
+```{r}
+
+fit2 = lm(Type_Magnitude$magnitude ~ Type_Magnitude$type)
+summary(fit2)
+
+```
+*** Based on this analysis, there's a statistically significant relationship between "type" and "magnitude" in the "Type_Magnitude" data. The model explains about 73% of the variance in "magnitude ***
+
+
+
+```{r}
+
+regression3 = lm(Type_Temp$temp ~ Type_Temp$type)
+rsq <- function(x, y) summary(lm(Type_Temp$temp ~ Type_Temp$type))$r.squared
+r_square = round(rsq(obs, mod), 3)
+# summary(regression)$coefficients - keep to sanity check
+coeff = round(summary(regression)$coefficients[2],3)
+y_int = round(summary(regression)$coefficients[1],3)
+plot(
+  Type_Temp$temp,
+  Type_Temp$type,
+  main='Temp by type of star',
+  xlab='Temp',
+  ylab='Type',
+   col='lightblue', 
+   bg='black', 
+   pch = 21,
+)
+# rsq_str = expression(paste("r"^"2:"))
+rsq_str = "r2: "
+text(175, 75, paste0('y = ', coeff, 'x + ', y_int), cex=0.75)
+text(170, 70, paste0(rsq_str, r_square), cex=0.75)
+abline(
+  lm(
+    Type_Temp$temp ~ Type_Temp$type),
+  col='red',
+  lwd=1.75)
+
+
+```
+
+```{r}
+
+fit3 = lm(Type_Temp$temp ~ Type_Temp$type)
+summary(fit3)
+
+
+```
+
+*** The very high R-squared value (0.8924) suggests a strong relationship between "type" and "temp." However, it's important to be cautious with such a high value, as it could indicate overfitting ***
+
+
+
+#### Conclusion
+
+
+
+*** It might be possible to accurately predict what type of star a star may be by knowing the temperature and magnitude of a star. We would need better data because we can see in the histograms that the data is not linear or very normal. We would have to transform the data to get more accurate and reliable results. ***
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
