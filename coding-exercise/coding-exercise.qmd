@@ -332,7 +332,11 @@ lines(new_data$population, predict(fit2, new_data), col='cornflowerblue')
 # Add a legend to differentiate the lines
 legend("topright", legend=c("Linear Fit", "Polynomial Fit (degree 2)"), col=c("darkblue", "cornflowerblue"), lwd=2)
 ```
-***********************************Conclusion****************************************************************
+
+
+
+
+************************ Edward Cruz contributed this portion ******************************************
 
 
 ### Help Function
