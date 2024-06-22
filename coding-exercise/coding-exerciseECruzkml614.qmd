@@ -295,16 +295,11 @@ fit2 = lm(life_expectancy ~ log(population), data=african_mortality2000)
 summary(fit4)
 
 ```
-#### Conclusion
+
 
 ***  This part contributed by Leonel Salazar, IGE436 ***
 
 
----
-title: "My part of the code"
-author: "leonel salazar"
-format: docx
----
 
 ## Loading and Checking Data
 ### Import libraries
