@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.553">
+<meta name="generator" content="quarto-1.4.555">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>YOURNAME Data Analysis Portfolio - R Coding Exercise</title>
+<title>Leonel Salazar Data Analysis Portfolio - R Coding Exercise</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -79,7 +113,7 @@ ul.task-list li input[type="checkbox"] {
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../index.html">
-    <span class="navbar-title">YOURNAME Data Analysis Portfolio</span>
+    <span class="navbar-title">Leonel Salazar Data Analysis Portfolio</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -118,7 +152,7 @@ ul.task-list li input[type="checkbox"] {
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item compact">
-    <a class="nav-link" href="../URL-TO-THIS-REPOSITORY-HERE"> <i class="bi bi-github" role="img">
+    <a class="nav-link" href="https://github.com/Leonel-Salazar/leonelsalazar-P2-portfolio"> <i class="bi bi-github" role="img">
 </i> 
 <span class="menu-text"></span></a>
   </li>  
@@ -157,8 +191,1619 @@ ul.task-list li input[type="checkbox"] {
 
 
 <p>Placeholder file for the future R coding exercise.</p>
+<section id="loading-and-checking-data" class="level2">
+<h2 class="anchored" data-anchor-id="loading-and-checking-data">Loading and Checking Data</h2>
+<section id="import-libraries" class="level3">
+<h3 class="anchored" data-anchor-id="import-libraries">Import libraries</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dslabs) <span class="co"># to import dataset</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'dslabs' was built under R version 4.3.3</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co"># data aggregation</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'ggplot2' was built under R version 4.3.2</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'dplyr' was built under R version 4.3.2</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'stringr' was built under R version 4.3.2</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'lubridate' was built under R version 4.3.2</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ dplyr     1.1.4     ✔ readr     2.1.4
+✔ forcats   1.0.0     ✔ stringr   1.5.1
+✔ ggplot2   3.4.4     ✔ tibble    3.2.1
+✔ lubridate 1.9.3     ✔ tidyr     1.3.0
+✔ purrr     1.0.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr) <span class="co"># data aggregation? </span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(gapminder)</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(renv)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: package 'renv' was built under R version 4.3.3</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'renv'
+
+The following object is masked from 'package:purrr':
+
+    modify
+
+The following objects are masked from 'package:stats':
+
+    embed, update
+
+The following objects are masked from 'package:utils':
+
+    history, upgrade
+
+The following objects are masked from 'package:base':
+
+    autoload, load, remove</code></pre>
+</div>
+</div>
+</section>
+<section id="help-function" class="level3">
+<h3 class="anchored" data-anchor-id="help-function">Help Function</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">help</span>(<span class="st">"gapminder"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>starting httpd help server ... done</code></pre>
+</div>
+</div>
+</section>
+<section id="data-structure-overview" class="level3">
+<h3 class="anchored" data-anchor-id="data-structure-overview">Data Structure Overview</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(gapminder)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   10545 obs. of  9 variables:
+ $ country         : Factor w/ 185 levels "Albania","Algeria",..: 1 2 3 4 5 6 7 8 9 10 ...
+ $ year            : int  1960 1960 1960 1960 1960 1960 1960 1960 1960 1960 ...
+ $ infant_mortality: num  115.4 148.2 208 NA 59.9 ...
+ $ life_expectancy : num  62.9 47.5 36 63 65.4 ...
+ $ fertility       : num  6.19 7.65 7.32 4.43 3.11 4.55 4.82 3.45 2.7 5.57 ...
+ $ population      : num  1636054 11124892 5270844 54681 20619075 ...
+ $ gdp             : num  NA 1.38e+10 NA NA 1.08e+11 ...
+ $ continent       : Factor w/ 5 levels "Africa","Americas",..: 4 1 1 2 2 3 2 5 4 3 ...
+ $ region          : Factor w/ 22 levels "Australia and New Zealand",..: 19 11 10 2 15 21 2 1 22 21 ...</code></pre>
+</div>
+</div>
+</section>
+<section id="data-summary" class="level3">
+<h3 class="anchored" data-anchor-id="data-summary">Data Summary</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(gapminder)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                country           year      infant_mortality life_expectancy
+ Albania            :   57   Min.   :1960   Min.   :  1.50   Min.   :13.20  
+ Algeria            :   57   1st Qu.:1974   1st Qu.: 16.00   1st Qu.:57.50  
+ Angola             :   57   Median :1988   Median : 41.50   Median :67.54  
+ Antigua and Barbuda:   57   Mean   :1988   Mean   : 55.31   Mean   :64.81  
+ Argentina          :   57   3rd Qu.:2002   3rd Qu.: 85.10   3rd Qu.:73.00  
+ Armenia            :   57   Max.   :2016   Max.   :276.90   Max.   :83.90  
+ (Other)            :10203                  NA's   :1453                    
+   fertility       population             gdp               continent   
+ Min.   :0.840   Min.   :3.124e+04   Min.   :4.040e+07   Africa  :2907  
+ 1st Qu.:2.200   1st Qu.:1.333e+06   1st Qu.:1.846e+09   Americas:2052  
+ Median :3.750   Median :5.009e+06   Median :7.794e+09   Asia    :2679  
+ Mean   :4.084   Mean   :2.701e+07   Mean   :1.480e+11   Europe  :2223  
+ 3rd Qu.:6.000   3rd Qu.:1.523e+07   3rd Qu.:5.540e+10   Oceania : 684  
+ Max.   :9.220   Max.   :1.376e+09   Max.   :1.174e+13                  
+ NA's   :187     NA's   :185         NA's   :2972                       
+             region    
+ Western Asia   :1026  
+ Eastern Africa : 912  
+ Western Africa : 912  
+ Caribbean      : 741  
+ South America  : 684  
+ Southern Europe: 684  
+ (Other)        :5586  </code></pre>
+</div>
+</div>
+</section>
+<section id="class-functions---object-determination" class="level3">
+<h3 class="anchored" data-anchor-id="class-functions---object-determination">Class Functions - Object Determination</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(gapminder)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "data.frame"</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="processing-data" class="level2">
+<h2 class="anchored" data-anchor-id="processing-data">Processing Data</h2>
+<section id="assign-only-african-countries-to-a-new-objectvariable." class="level3">
+<h3 class="anchored" data-anchor-id="assign-only-african-countries-to-a-new-objectvariable.">Assign only African countries to a new object/variable.</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>africadata <span class="ot">=</span> <span class="fu">filter</span>(gapminder, continent <span class="sc">==</span> <span class="st">'Africa'</span>)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(africadata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       country year infant_mortality life_expectancy fertility population
+1      Algeria 1960            148.2           47.50      7.65   11124892
+2       Angola 1960            208.0           35.98      7.32    5270844
+3        Benin 1960            186.9           38.29      6.28    2431620
+4     Botswana 1960            115.5           50.34      6.62     524029
+5 Burkina Faso 1960            161.3           35.21      6.29    4829291
+6      Burundi 1960            145.1           40.58      6.95    2786740
+          gdp continent          region
+1 13828152297    Africa Northern Africa
+2          NA    Africa   Middle Africa
+3   621797131    Africa  Western Africa
+4   124460933    Africa Southern Africa
+5   596612183    Africa  Western Africa
+6   341126765    Africa  Eastern Africa</code></pre>
+</div>
+</div>
+</section>
+<section id="africa-data-structure-overview" class="level3">
+<h3 class="anchored" data-anchor-id="africa-data-structure-overview">Africa Data Structure Overview</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(africadata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   2907 obs. of  9 variables:
+ $ country         : Factor w/ 185 levels "Albania","Algeria",..: 2 3 18 22 26 27 29 31 32 33 ...
+ $ year            : int  1960 1960 1960 1960 1960 1960 1960 1960 1960 1960 ...
+ $ infant_mortality: num  148 208 187 116 161 ...
+ $ life_expectancy : num  47.5 36 38.3 50.3 35.2 ...
+ $ fertility       : num  7.65 7.32 6.28 6.62 6.29 6.95 5.65 6.89 5.84 6.25 ...
+ $ population      : num  11124892 5270844 2431620 524029 4829291 ...
+ $ gdp             : num  1.38e+10 NA 6.22e+08 1.24e+08 5.97e+08 ...
+ $ continent       : Factor w/ 5 levels "Africa","Americas",..: 1 1 1 1 1 1 1 1 1 1 ...
+ $ region          : Factor w/ 22 levels "Australia and New Zealand",..: 11 10 20 17 20 5 10 20 10 10 ...</code></pre>
+</div>
+</div>
+</section>
+<section id="africa-summary" class="level3">
+<h3 class="anchored" data-anchor-id="africa-summary">Africa Summary</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(africadata)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         country          year      infant_mortality life_expectancy
+ Algeria     :  57   Min.   :1960   Min.   : 11.40   Min.   :13.20  
+ Angola      :  57   1st Qu.:1974   1st Qu.: 62.20   1st Qu.:48.23  
+ Benin       :  57   Median :1988   Median : 93.40   Median :53.98  
+ Botswana    :  57   Mean   :1988   Mean   : 95.12   Mean   :54.38  
+ Burkina Faso:  57   3rd Qu.:2002   3rd Qu.:124.70   3rd Qu.:60.10  
+ Burundi     :  57   Max.   :2016   Max.   :237.40   Max.   :77.60  
+ (Other)     :2565                  NA's   :226                     
+   fertility       population             gdp               continent   
+ Min.   :1.500   Min.   :    41538   Min.   :4.659e+07   Africa  :2907  
+ 1st Qu.:5.160   1st Qu.:  1605232   1st Qu.:8.373e+08   Americas:   0  
+ Median :6.160   Median :  5570982   Median :2.448e+09   Asia    :   0  
+ Mean   :5.851   Mean   : 12235961   Mean   :9.346e+09   Europe  :   0  
+ 3rd Qu.:6.860   3rd Qu.: 13888152   3rd Qu.:6.552e+09   Oceania :   0  
+ Max.   :8.450   Max.   :182201962   Max.   :1.935e+11                  
+ NA's   :51      NA's   :51          NA's   :637                        
+                       region   
+ Eastern Africa           :912  
+ Western Africa           :912  
+ Middle Africa            :456  
+ Northern Africa          :342  
+ Southern Africa          :285  
+ Australia and New Zealand:  0  
+ (Other)                  :  0  </code></pre>
+</div>
+</div>
+</section>
+<section id="african-infant-mortality-object" class="level3">
+<h3 class="anchored" data-anchor-id="african-infant-mortality-object">African Infant Mortality Object</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>infant_survival_rate <span class="ot">=</span> africadata <span class="sc">%&gt;%</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(infant_mortality, life_expectancy)</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(infant_survival_rate)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  infant_mortality life_expectancy
+1            148.2           47.50
+2            208.0           35.98
+3            186.9           38.29
+4            115.5           50.34
+5            161.3           35.21
+6            145.1           40.58</code></pre>
+</div>
+</div>
+</section>
+<section id="african-infant-mortality-data-structure" class="level3">
+<h3 class="anchored" data-anchor-id="african-infant-mortality-data-structure">African Infant Mortality Data Structure</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(infant_survival_rate)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   2907 obs. of  2 variables:
+ $ infant_mortality: num  148 208 187 116 161 ...
+ $ life_expectancy : num  47.5 36 38.3 50.3 35.2 ...</code></pre>
+</div>
+</div>
+</section>
+<section id="african-infant-mortality-data-summary" class="level3">
+<h3 class="anchored" data-anchor-id="african-infant-mortality-data-summary">African Infant Mortality Data Summary</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(infant_survival_rate)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> infant_mortality life_expectancy
+ Min.   : 11.40   Min.   :13.20  
+ 1st Qu.: 62.20   1st Qu.:48.23  
+ Median : 93.40   Median :53.98  
+ Mean   : 95.12   Mean   :54.38  
+ 3rd Qu.:124.70   3rd Qu.:60.10  
+ Max.   :237.40   Max.   :77.60  
+ NA's   :226                     </code></pre>
+</div>
+</div>
+</section>
+<section id="african-mortality-object" class="level3">
+<h3 class="anchored" data-anchor-id="african-mortality-object">African Mortality Object</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>african_mortality <span class="ot">=</span> africadata <span class="sc">%&gt;%</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(population, life_expectancy)</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(african_mortality)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  population life_expectancy
+1   11124892           47.50
+2    5270844           35.98
+3    2431620           38.29
+4     524029           50.34
+5    4829291           35.21
+6    2786740           40.58</code></pre>
+</div>
+</div>
+</section>
+<section id="african-mortality-data-structure" class="level3">
+<h3 class="anchored" data-anchor-id="african-mortality-data-structure">African Mortality Data Structure</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(african_mortality)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   2907 obs. of  2 variables:
+ $ population     : num  11124892 5270844 2431620 524029 4829291 ...
+ $ life_expectancy: num  47.5 36 38.3 50.3 35.2 ...</code></pre>
+</div>
+</div>
+</section>
+<section id="african-mortality-data-summary" class="level3">
+<h3 class="anchored" data-anchor-id="african-mortality-data-summary">African Mortality Data Summary</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(african_mortality)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   population        life_expectancy
+ Min.   :    41538   Min.   :13.20  
+ 1st Qu.:  1605232   1st Qu.:48.23  
+ Median :  5570982   Median :53.98  
+ Mean   : 12235961   Mean   :54.38  
+ 3rd Qu.: 13888152   3rd Qu.:60.10  
+ Max.   :182201962   Max.   :77.60  
+ NA's   :51                         </code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="plotting" class="level2">
+<h2 class="anchored" data-anchor-id="plotting">Plotting</h2>
+<section id="life-expectancy-as-a-function-of-infant-mortality" class="level3">
+<h3 class="anchored" data-anchor-id="life-expectancy-as-a-function-of-infant-mortality">Life Expectancy as a Function of Infant Mortality</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>regression <span class="ot">=</span> <span class="fu">lm</span>(infant_survival_rate<span class="sc">$</span>life_expectancy <span class="sc">~</span> infant_survival_rate<span class="sc">$</span>infant_mortality)</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>rsq <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y) <span class="fu">summary</span>(<span class="fu">lm</span>(infant_survival_rate<span class="sc">$</span>life_expectancy <span class="sc">~</span> infant_survival_rate<span class="sc">$</span>infant_mortality))<span class="sc">$</span>r.squared</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>r_square <span class="ot">=</span> <span class="fu">round</span>(<span class="fu">rsq</span>(obs, mod), <span class="dv">3</span>)</span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="co"># summary(regression)$coefficients - keep to sanity check</span></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>coeff <span class="ot">=</span> <span class="fu">round</span>(<span class="fu">summary</span>(regression)<span class="sc">$</span>coefficients[<span class="dv">2</span>],<span class="dv">3</span>)</span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>y_int <span class="ot">=</span> <span class="fu">round</span>(<span class="fu">summary</span>(regression)<span class="sc">$</span>coefficients[<span class="dv">1</span>],<span class="dv">3</span>)</span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(</span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>  infant_survival_rate<span class="sc">$</span>infant_mortality,</span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>  infant_survival_rate<span class="sc">$</span>life_expectancy,</span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">main=</span><span class="st">'African Life Expectancy </span><span class="sc">\n</span><span class="st"> Infant Mortality Effect'</span>,</span>
+<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab=</span><span class="st">'Infant Mortality'</span>,</span>
+<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab=</span><span class="st">'Life Expectancy'</span>,</span>
+<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a>   <span class="at">col=</span><span class="st">'lightblue'</span>, </span>
+<span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a>   <span class="at">bg=</span><span class="st">'black'</span>, </span>
+<span id="cb38-15"><a href="#cb38-15" aria-hidden="true" tabindex="-1"></a>   <span class="at">pch =</span> <span class="dv">21</span>,</span>
+<span id="cb38-16"><a href="#cb38-16" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb38-17"><a href="#cb38-17" aria-hidden="true" tabindex="-1"></a><span class="co"># rsq_str = expression(paste("r"^"2:"))</span></span>
+<span id="cb38-18"><a href="#cb38-18" aria-hidden="true" tabindex="-1"></a>rsq_str <span class="ot">=</span> <span class="st">"r2: "</span></span>
+<span id="cb38-19"><a href="#cb38-19" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="dv">175</span>, <span class="dv">75</span>, <span class="fu">paste0</span>(<span class="st">'y = '</span>, coeff, <span class="st">'x + '</span>, y_int), <span class="at">cex=</span><span class="fl">0.75</span>)</span>
+<span id="cb38-20"><a href="#cb38-20" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="dv">170</span>, <span class="dv">70</span>, <span class="fu">paste0</span>(rsq_str, r_square), <span class="at">cex=</span><span class="fl">0.75</span>)</span>
+<span id="cb38-21"><a href="#cb38-21" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(</span>
+<span id="cb38-22"><a href="#cb38-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(</span>
+<span id="cb38-23"><a href="#cb38-23" aria-hidden="true" tabindex="-1"></a>    infant_survival_rate<span class="sc">$</span>life_expectancy <span class="sc">~</span> infant_survival_rate<span class="sc">$</span>infant_mortality),</span>
+<span id="cb38-24"><a href="#cb38-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">col=</span><span class="st">'red'</span>,</span>
+<span id="cb38-25"><a href="#cb38-25" aria-hidden="true" tabindex="-1"></a>  <span class="at">lwd=</span><span class="fl">1.75</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="coding-exercise_files/figure-html/unnamed-chunk-15-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="life-expectancy-as-a-function-of-population" class="level3">
+<h3 class="anchored" data-anchor-id="life-expectancy-as-a-function-of-population">Life Expectancy as a Function of Population</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>regression <span class="ot">=</span> <span class="fu">lm</span>(african_mortality<span class="sc">$</span>life_expectancy <span class="sc">~</span> african_mortality<span class="sc">$</span>population)</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>rsq <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y) <span class="fu">summary</span>(<span class="fu">lm</span>(african_mortality<span class="sc">$</span>life_expectancy <span class="sc">~</span> african_mortality<span class="sc">$</span>population))<span class="sc">$</span>r.squared</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>r_square <span class="ot">=</span> <span class="fu">round</span>(<span class="fu">rsq</span>(obs, mod), <span class="dv">3</span>)</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="co"># summary(regression)$coefficients - keep to sanity check</span></span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>coeff <span class="ot">=</span> <span class="fu">round</span>(<span class="fu">summary</span>(regression)<span class="sc">$</span>coefficients[<span class="dv">2</span>],<span class="dv">9</span>)</span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>y_int <span class="ot">=</span> <span class="fu">round</span>(<span class="fu">summary</span>(regression)<span class="sc">$</span>coefficients[<span class="dv">1</span>],<span class="dv">3</span>)</span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(</span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>  african_mortality<span class="sc">$</span>population,</span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>  african_mortality<span class="sc">$</span>life_expectancy,</span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">main=</span><span class="st">'African Life Expectancy </span><span class="sc">\n</span><span class="st"> Population Effect'</span>,</span>
+<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab=</span><span class="st">'Population'</span>,</span>
+<span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab=</span><span class="st">'Life Expectancy'</span>,</span>
+<span id="cb39-13"><a href="#cb39-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">col=</span><span class="st">'blue'</span>, </span>
+<span id="cb39-14"><a href="#cb39-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">bg=</span><span class="st">'lightblue'</span>, </span>
+<span id="cb39-15"><a href="#cb39-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">pch =</span> <span class="dv">21</span>,</span>
+<span id="cb39-16"><a href="#cb39-16" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb39-17"><a href="#cb39-17" aria-hidden="true" tabindex="-1"></a><span class="co"># rsq_str = expression(paste("r"^"2:"))</span></span>
+<span id="cb39-18"><a href="#cb39-18" aria-hidden="true" tabindex="-1"></a>rsq_str <span class="ot">=</span> <span class="st">"r2: "</span></span>
+<span id="cb39-19"><a href="#cb39-19" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="dv">155000000</span>, <span class="dv">75</span>, <span class="fu">paste0</span>(<span class="st">'y = '</span>, coeff, <span class="st">'x + '</span>, y_int), <span class="at">cex=</span><span class="fl">0.75</span>)</span>
+<span id="cb39-20"><a href="#cb39-20" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="dv">155000000</span>, <span class="dv">70</span>, <span class="fu">paste0</span>(rsq_str, r_square), <span class="at">cex=</span><span class="fl">0.75</span>)</span>
+<span id="cb39-21"><a href="#cb39-21" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(</span>
+<span id="cb39-22"><a href="#cb39-22" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(</span>
+<span id="cb39-23"><a href="#cb39-23" aria-hidden="true" tabindex="-1"></a>  african_mortality<span class="sc">$</span>life_expectancy <span class="sc">~</span> african_mortality<span class="sc">$</span>population),</span>
+<span id="cb39-24"><a href="#cb39-24" aria-hidden="true" tabindex="-1"></a><span class="at">col=</span><span class="st">'black'</span>,</span>
+<span id="cb39-25"><a href="#cb39-25" aria-hidden="true" tabindex="-1"></a><span class="at">lwd=</span><span class="fl">1.75</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="coding-exercise_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The graph attempts to demonstrate that relationship between Population increase and life expectancy overcoming life expectancy with a low R^2 is not dependent on life expectancy but possibly resulting from the strongest will survive and improving healthcare accessibility, GDP-gross domestic product, education and food source successfully allowing those Africans to survive and continue.<br>
+## More Data Processing ### Missing Years For Infant Mortality Data</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>miss_inf_mort_rows <span class="ot">=</span> africadata <span class="sc">%&gt;%</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">is.na</span>(infant_mortality))</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(miss_inf_mort_rows)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            country year infant_mortality life_expectancy fertility population
+1        Cape Verde 1960               NA           50.12      6.89     202316
+2              Chad 1960               NA           40.95      6.25    3002596
+3          Djibouti 1960               NA           45.77      6.46      83636
+4 Equatorial Guinea 1960               NA           37.69      5.51     252115
+5           Eritrea 1960               NA           39.03      6.90    1407631
+6             Gabon 1960               NA           38.83      4.38     499189
+        gdp continent         region
+1        NA    Africa Western Africa
+2 750173439    Africa  Middle Africa
+3        NA    Africa Eastern Africa
+4        NA    Africa  Middle Africa
+5        NA    Africa Eastern Africa
+6 887289809    Africa  Middle Africa</code></pre>
+</div>
+</div>
+</section>
+<section id="perform-year-groupby-to-identify-distinct-missing-years" class="level3">
+<h3 class="anchored" data-anchor-id="perform-year-groupby-to-identify-distinct-missing-years">Perform Year Groupby to Identify Distinct Missing Years</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>miss_inf_mort_yrs <span class="ot">=</span> miss_inf_mort_rows <span class="sc">%&gt;%</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(year) <span class="sc">%&gt;%</span></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(infant_mortality)</span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>miss_inf_mort_yrs</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 23 × 3
+# Groups:   year [23]
+    year infant_mortality     n
+   &lt;int&gt;            &lt;dbl&gt; &lt;int&gt;
+ 1  1960               NA    10
+ 2  1961               NA    17
+ 3  1962               NA    16
+ 4  1963               NA    16
+ 5  1964               NA    15
+ 6  1965               NA    14
+ 7  1966               NA    13
+ 8  1967               NA    11
+ 9  1968               NA    11
+10  1969               NA     7
+# ℹ 13 more rows</code></pre>
+</div>
+</div>
+</section>
+<section id="extract-only-year-2000-from-africadata-as-new-object" class="level3">
+<h3 class="anchored" data-anchor-id="extract-only-year-2000-from-africadata-as-new-object">Extract Only Year 2000 From africadata As New Object</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>africadata2000 <span class="ot">=</span> <span class="fu">filter</span>(africadata, year <span class="sc">==</span> <span class="dv">2000</span>)</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>africadata2000</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                    country year infant_mortality life_expectancy fertility
+1                   Algeria 2000             33.9            73.3      2.51
+2                    Angola 2000            128.3            52.3      6.84
+3                     Benin 2000             89.3            57.2      5.98
+4                  Botswana 2000             52.4            47.6      3.41
+5              Burkina Faso 2000             96.2            52.6      6.59
+6                   Burundi 2000             93.4            46.7      7.06
+7                  Cameroon 2000             91.9            54.3      5.62
+8                Cape Verde 2000             29.1            68.4      3.70
+9  Central African Republic 2000            113.6            45.3      5.45
+10                     Chad 2000            105.7            51.5      7.35
+11                  Comoros 2000             72.7            62.1      5.32
+12         Congo, Dem. Rep. 2000            107.4            54.3      7.09
+13              Congo, Rep. 2000             76.6            52.5      5.13
+14            Cote d'Ivoire 2000             99.5            52.0      5.38
+15                 Djibouti 2000             79.7            60.0      4.47
+16                    Egypt 2000             37.0            69.7      3.31
+17        Equatorial Guinea 2000            104.8            52.9      5.77
+18                  Eritrea 2000             58.3            37.6      5.94
+19                 Ethiopia 2000             89.5            52.1      6.53
+20                    Gabon 2000             55.6            59.3      4.60
+21                   Gambia 2000             63.3            63.6      5.92
+22                    Ghana 2000             64.9            60.0      4.67
+23                   Guinea 2000            103.1            54.2      5.94
+24            Guinea-Bissau 2000            106.9            52.8      5.85
+25                    Kenya 2000             66.5            55.6      5.01
+26                  Lesotho 2000             84.1            50.7      4.09
+27                  Liberia 2000            123.0            55.8      5.88
+28                    Libya 2000             24.2            74.8      3.05
+29               Madagascar 2000             69.7            59.1      5.55
+30                   Malawi 2000            103.5            45.4      6.25
+31                     Mali 2000            116.0            53.5      6.84
+32               Mauritania 2000             76.2            63.8      5.38
+33                Mauritius 2000             16.4            71.4      1.99
+34                  Morocco 2000             42.2            71.5      2.70
+35               Mozambique 2000            115.0            52.3      5.78
+36                  Namibia 2000             49.4            54.0      4.03
+37                    Niger 2000            101.1            52.4      7.73
+38                  Nigeria 2000            112.0            55.2      6.10
+39                   Rwanda 2000            109.2            49.2      5.90
+40                  Senegal 2000             68.5            59.7      5.56
+41               Seychelles 2000             12.3            70.9      2.15
+42             Sierra Leone 2000            143.3            51.5      5.92
+43             South Africa 2000             54.0            56.4      2.87
+44                    Sudan 2000             67.8            62.4      5.44
+45                Swaziland 2000             84.0            48.8      4.21
+46                 Tanzania 2000             80.3            54.3      5.69
+47                     Togo 2000             76.2            56.7      5.29
+48                  Tunisia 2000             26.3            75.0      2.11
+49                   Uganda 2000             90.0            49.1      6.87
+50                   Zambia 2000             97.6            44.8      6.07
+51                 Zimbabwe 2000             63.5            47.9      4.07
+   population          gdp continent          region
+1    31183658  54790058957    Africa Northern Africa
+2    15058638   9129180361    Africa   Middle Africa
+3     6949366   2254838685    Africa  Western Africa
+4     1736579   5632391130    Africa Southern Africa
+5    11607944   2610945549    Africa  Western Africa
+6     6767073    835334807    Africa  Eastern Africa
+7    15927713  10075040331    Africa   Middle Africa
+8      438737    539227053    Africa  Western Africa
+9     3726048    959413051    Africa   Middle Africa
+10    8343321   1385050964    Africa   Middle Africa
+11     547696    201900820    Africa  Eastern Africa
+12   48048664   4305797176    Africa   Middle Africa
+13    3109269   3219893817    Africa   Middle Africa
+14   16517948  10417006096    Africa  Western Africa
+15     722562    551230862    Africa  Eastern Africa
+16   68334905  99838540997    Africa Northern Africa
+17     530896   1254223037    Africa   Middle Africa
+18    3535156    633600000    Africa  Eastern Africa
+19   66443603   8179533779    Africa  Eastern Africa
+20    1231548   5067838984    Africa   Middle Africa
+21    1228863    786665264    Africa  Western Africa
+22   18824994   4977488790    Africa  Western Africa
+23    8799165   3112362568    Africa  Western Africa
+24    1315455    215455490    Africa  Western Africa
+25   31065820  12691278914    Africa  Eastern Africa
+26    1856225    745832990    Africa Southern Africa
+27    2891968    529064647    Africa  Western Africa
+28    5337264  33896600871    Africa Northern Africa
+29   15744811   3877575177    Africa  Eastern Africa
+30   11193230   1743506520    Africa  Eastern Africa
+31   11046926   2422469641    Africa  Western Africa
+32    2711421   1293653473    Africa  Western Africa
+33    1185143   4582562398    Africa  Eastern Africa
+34   28950553  37020609825    Africa Northern Africa
+35   18264536   4248747769    Africa  Eastern Africa
+36    1897953   3908501441    Africa Southern Africa
+37   11224523   1798365123    Africa  Western Africa
+38  122876723  45983449593    Africa  Western Africa
+39    8021875   1734921293    Africa  Eastern Africa
+40    9860578   4691828357    Africa  Western Africa
+41      81154    614879765    Africa  Eastern Africa
+42    4060709    635876870    Africa  Western Africa
+43   44896856 132877648091    Africa Southern Africa
+44   28079664  12366140066    Africa Northern Africa
+45    1063715   1524452437    Africa Southern Africa
+46   33991590  10185786171    Africa  Eastern Africa
+47    4874735   1294243543    Africa  Western Africa
+48    9699192  21473261837    Africa Northern Africa
+49   23757636   6193246632    Africa  Eastern Africa
+50   10585220   3237716325    Africa  Eastern Africa
+51   12499981   6689957610    Africa  Eastern Africa</code></pre>
+</div>
+</div>
+</section>
+<section id="africadata2000-data-structure" class="level3">
+<h3 class="anchored" data-anchor-id="africadata2000-data-structure">africadata2000 Data Structure</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(africadata2000)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   51 obs. of  9 variables:
+ $ country         : Factor w/ 185 levels "Albania","Algeria",..: 2 3 18 22 26 27 29 31 32 33 ...
+ $ year            : int  2000 2000 2000 2000 2000 2000 2000 2000 2000 2000 ...
+ $ infant_mortality: num  33.9 128.3 89.3 52.4 96.2 ...
+ $ life_expectancy : num  73.3 52.3 57.2 47.6 52.6 46.7 54.3 68.4 45.3 51.5 ...
+ $ fertility       : num  2.51 6.84 5.98 3.41 6.59 7.06 5.62 3.7 5.45 7.35 ...
+ $ population      : num  31183658 15058638 6949366 1736579 11607944 ...
+ $ gdp             : num  5.48e+10 9.13e+09 2.25e+09 5.63e+09 2.61e+09 ...
+ $ continent       : Factor w/ 5 levels "Africa","Americas",..: 1 1 1 1 1 1 1 1 1 1 ...
+ $ region          : Factor w/ 22 levels "Australia and New Zealand",..: 11 10 20 17 20 5 10 20 10 10 ...</code></pre>
+</div>
+</div>
+</section>
+<section id="africadata2000-data-summary" class="level3">
+<h3 class="anchored" data-anchor-id="africadata2000-data-summary">africadata2000 Data Summary</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(africadata2000)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         country        year      infant_mortality life_expectancy
+ Algeria     : 1   Min.   :2000   Min.   : 12.30   Min.   :37.60  
+ Angola      : 1   1st Qu.:2000   1st Qu.: 60.80   1st Qu.:51.75  
+ Benin       : 1   Median :2000   Median : 80.30   Median :54.30  
+ Botswana    : 1   Mean   :2000   Mean   : 78.93   Mean   :56.36  
+ Burkina Faso: 1   3rd Qu.:2000   3rd Qu.:103.30   3rd Qu.:60.00  
+ Burundi     : 1   Max.   :2000   Max.   :143.30   Max.   :75.00  
+ (Other)     :45                                                  
+   fertility       population             gdp               continent 
+ Min.   :1.990   Min.   :    81154   Min.   :2.019e+08   Africa  :51  
+ 1st Qu.:4.150   1st Qu.:  2304687   1st Qu.:1.274e+09   Americas: 0  
+ Median :5.550   Median :  8799165   Median :3.238e+09   Asia    : 0  
+ Mean   :5.156   Mean   : 15659800   Mean   :1.155e+10   Europe  : 0  
+ 3rd Qu.:5.960   3rd Qu.: 17391242   3rd Qu.:8.654e+09   Oceania : 0  
+ Max.   :7.730   Max.   :122876723   Max.   :1.329e+11                
+                                                                      
+                       region  
+ Eastern Africa           :16  
+ Western Africa           :16  
+ Middle Africa            : 8  
+ Northern Africa          : 6  
+ Southern Africa          : 5  
+ Australia and New Zealand: 0  
+ (Other)                  : 0  </code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="more-plotting" class="level2">
+<h2 class="anchored" data-anchor-id="more-plotting">More Plotting</h2>
+<section id="create-the-same-plots-for-africadata2000-object" class="level3">
+<h3 class="anchored" data-anchor-id="create-the-same-plots-for-africadata2000-object">Create The Same Plots For africadata2000 Object</h3>
+<section id="filter-new-object-to-create-graph-datasets-12" class="level4">
+<h4 class="anchored" data-anchor-id="filter-new-object-to-create-graph-datasets-12">Filter New Object to Create Graph Datasets (1/2)</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>african_mortality2000 <span class="ot">=</span> africadata2000 <span class="sc">%&gt;%</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(population, life_expectancy)</span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(african_mortality2000)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  population life_expectancy
+1   31183658            73.3
+2   15058638            52.3
+3    6949366            57.2
+4    1736579            47.6
+5   11607944            52.6
+6    6767073            46.7</code></pre>
+</div>
+</div>
+</section>
+<section id="filter-new-object-to-create-graph-datasets-22" class="level4">
+<h4 class="anchored" data-anchor-id="filter-new-object-to-create-graph-datasets-22">Filter New Object to Create Graph Datasets (2/2)</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>infant_survival_rate2000 <span class="ot">=</span> africadata2000 <span class="sc">%&gt;%</span></span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(infant_mortality, life_expectancy)</span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(african_mortality2000)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  population life_expectancy
+1   31183658            73.3
+2   15058638            52.3
+3    6949366            57.2
+4    1736579            47.6
+5   11607944            52.6
+6    6767073            46.7</code></pre>
+</div>
+</div>
+</section>
+<section id="infant-mortality-effect" class="level4">
+<h4 class="anchored" data-anchor-id="infant-mortality-effect">Infant Mortality Effect</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a>regression <span class="ot">=</span> <span class="fu">lm</span>(infant_survival_rate2000<span class="sc">$</span>life_expectancy <span class="sc">~</span> infant_survival_rate2000<span class="sc">$</span>infant_mortality)</span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>rsq <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y) <span class="fu">summary</span>(<span class="fu">lm</span>(infant_survival_rate2000<span class="sc">$</span>life_expectancy <span class="sc">~</span> infant_survival_rate2000<span class="sc">$</span>infant_mortality))<span class="sc">$</span>r.squared</span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a>r_square <span class="ot">=</span> <span class="fu">round</span>(<span class="fu">rsq</span>(obs, mod), <span class="dv">3</span>)</span>
+<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a><span class="co"># summary(regression)$coefficients - keep to sanity check</span></span>
+<span id="cb54-5"><a href="#cb54-5" aria-hidden="true" tabindex="-1"></a>coeff <span class="ot">=</span> <span class="fu">round</span>(<span class="fu">summary</span>(regression)<span class="sc">$</span>coefficients[<span class="dv">2</span>],<span class="dv">3</span>)</span>
+<span id="cb54-6"><a href="#cb54-6" aria-hidden="true" tabindex="-1"></a>y_int <span class="ot">=</span> <span class="fu">round</span>(<span class="fu">summary</span>(regression)<span class="sc">$</span>coefficients[<span class="dv">1</span>],<span class="dv">3</span>)</span>
+<span id="cb54-7"><a href="#cb54-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(</span>
+<span id="cb54-8"><a href="#cb54-8" aria-hidden="true" tabindex="-1"></a>  infant_survival_rate2000<span class="sc">$</span>infant_mortality,</span>
+<span id="cb54-9"><a href="#cb54-9" aria-hidden="true" tabindex="-1"></a>  infant_survival_rate2000<span class="sc">$</span>life_expectancy,</span>
+<span id="cb54-10"><a href="#cb54-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">main=</span><span class="st">'African Life Expectancy </span><span class="sc">\n</span><span class="st"> Infant Mortality Effect'</span>,</span>
+<span id="cb54-11"><a href="#cb54-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab=</span><span class="st">'Infant Mortality'</span>,</span>
+<span id="cb54-12"><a href="#cb54-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab=</span><span class="st">'Life Expectancy'</span>,</span>
+<span id="cb54-13"><a href="#cb54-13" aria-hidden="true" tabindex="-1"></a>   <span class="at">col=</span><span class="st">'blue'</span>, </span>
+<span id="cb54-14"><a href="#cb54-14" aria-hidden="true" tabindex="-1"></a>   <span class="at">bg=</span><span class="st">'lightblue'</span>, </span>
+<span id="cb54-15"><a href="#cb54-15" aria-hidden="true" tabindex="-1"></a>   <span class="at">pch =</span> <span class="dv">21</span>,</span>
+<span id="cb54-16"><a href="#cb54-16" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb54-17"><a href="#cb54-17" aria-hidden="true" tabindex="-1"></a><span class="co"># rsq_str = expression(paste("r"^"2:"))</span></span>
+<span id="cb54-18"><a href="#cb54-18" aria-hidden="true" tabindex="-1"></a>rsq_str <span class="ot">=</span> <span class="st">"r2: "</span></span>
+<span id="cb54-19"><a href="#cb54-19" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="dv">130</span>, <span class="dv">75</span>, <span class="fu">paste0</span>(<span class="st">'y = '</span>, coeff, <span class="st">'x + '</span>, y_int), <span class="at">cex=</span><span class="fl">0.75</span>)</span>
+<span id="cb54-20"><a href="#cb54-20" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="dv">130</span>, <span class="dv">73</span>, <span class="fu">paste0</span>(rsq_str, r_square), <span class="at">cex=</span><span class="fl">0.75</span>)</span>
+<span id="cb54-21"><a href="#cb54-21" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(</span>
+<span id="cb54-22"><a href="#cb54-22" aria-hidden="true" tabindex="-1"></a>  <span class="fu">lm</span>(</span>
+<span id="cb54-23"><a href="#cb54-23" aria-hidden="true" tabindex="-1"></a>    infant_survival_rate2000<span class="sc">$</span>life_expectancy <span class="sc">~</span> infant_survival_rate2000<span class="sc">$</span>infant_mortality),</span>
+<span id="cb54-24"><a href="#cb54-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">col=</span><span class="st">'black'</span>,</span>
+<span id="cb54-25"><a href="#cb54-25" aria-hidden="true" tabindex="-1"></a>  <span class="at">lwd=</span><span class="fl">1.75</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="coding-exercise_files/figure-html/unnamed-chunk-24-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="population-effect" class="level4">
+<h4 class="anchored" data-anchor-id="population-effect">Population Effect</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a>regression <span class="ot">=</span> <span class="fu">lm</span>(african_mortality2000<span class="sc">$</span>life_expectancy <span class="sc">~</span> african_mortality2000<span class="sc">$</span>population)</span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>rsq <span class="ot">&lt;-</span> <span class="cf">function</span>(x, y) <span class="fu">summary</span>(<span class="fu">lm</span>(african_mortality2000<span class="sc">$</span>life_expectancy <span class="sc">~</span> african_mortality2000<span class="sc">$</span>population))<span class="sc">$</span>r.squared</span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>r_square <span class="ot">=</span> <span class="fu">round</span>(<span class="fu">rsq</span>(obs, mod), <span class="dv">3</span>)</span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a><span class="co"># summary(regression)$coefficients - keep to sanity check</span></span>
+<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a>coeff <span class="ot">=</span> <span class="fu">round</span>(<span class="fu">summary</span>(regression)<span class="sc">$</span>coefficients[<span class="dv">2</span>],<span class="dv">9</span>)</span>
+<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a>y_int <span class="ot">=</span> <span class="fu">round</span>(<span class="fu">summary</span>(regression)<span class="sc">$</span>coefficients[<span class="dv">1</span>],<span class="dv">3</span>)</span>
+<span id="cb55-7"><a href="#cb55-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(</span>
+<span id="cb55-8"><a href="#cb55-8" aria-hidden="true" tabindex="-1"></a>  african_mortality2000<span class="sc">$</span>population,</span>
+<span id="cb55-9"><a href="#cb55-9" aria-hidden="true" tabindex="-1"></a>  african_mortality2000<span class="sc">$</span>life_expectancy,</span>
+<span id="cb55-10"><a href="#cb55-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">main=</span><span class="st">'African Life Expectancy </span><span class="sc">\n</span><span class="st"> Population Effect'</span>,</span>
+<span id="cb55-11"><a href="#cb55-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab=</span><span class="st">'Population'</span>,</span>
+<span id="cb55-12"><a href="#cb55-12" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab=</span><span class="st">'Life Expectancy'</span>,</span>
+<span id="cb55-13"><a href="#cb55-13" aria-hidden="true" tabindex="-1"></a>  <span class="at">col=</span><span class="st">'blue'</span>, </span>
+<span id="cb55-14"><a href="#cb55-14" aria-hidden="true" tabindex="-1"></a>  <span class="at">bg=</span><span class="st">'lightblue'</span>, </span>
+<span id="cb55-15"><a href="#cb55-15" aria-hidden="true" tabindex="-1"></a>  <span class="at">pch =</span> <span class="dv">21</span>,</span>
+<span id="cb55-16"><a href="#cb55-16" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb55-17"><a href="#cb55-17" aria-hidden="true" tabindex="-1"></a><span class="co"># rsq_str = expression(paste("r"^"2:"))</span></span>
+<span id="cb55-18"><a href="#cb55-18" aria-hidden="true" tabindex="-1"></a>rsq_str <span class="ot">=</span> <span class="st">"r2: "</span></span>
+<span id="cb55-19"><a href="#cb55-19" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="dv">110000000</span>, <span class="dv">75</span>, <span class="fu">paste0</span>(<span class="st">'y = '</span>, coeff, <span class="st">'x + '</span>, y_int), <span class="at">cex=</span><span class="fl">0.75</span>)</span>
+<span id="cb55-20"><a href="#cb55-20" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="dv">110000000</span>, <span class="dv">73</span>, <span class="fu">paste0</span>(rsq_str, r_square), <span class="at">cex=</span><span class="fl">0.75</span>)</span>
+<span id="cb55-21"><a href="#cb55-21" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(</span>
+<span id="cb55-22"><a href="#cb55-22" aria-hidden="true" tabindex="-1"></a><span class="fu">lm</span>(</span>
+<span id="cb55-23"><a href="#cb55-23" aria-hidden="true" tabindex="-1"></a>  african_mortality2000<span class="sc">$</span>life_expectancy <span class="sc">~</span> african_mortality2000<span class="sc">$</span>population),</span>
+<span id="cb55-24"><a href="#cb55-24" aria-hidden="true" tabindex="-1"></a><span class="at">col=</span><span class="st">'black'</span>,</span>
+<span id="cb55-25"><a href="#cb55-25" aria-hidden="true" tabindex="-1"></a><span class="at">lwd=</span><span class="fl">1.75</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="coding-exercise_files/figure-html/unnamed-chunk-25-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="simple-model-fits" class="level2">
+<h2 class="anchored" data-anchor-id="simple-model-fits">Simple Model Fits</h2>
+<section id="fit-life-expectancy-to-infant-mortality" class="level3">
+<h3 class="anchored" data-anchor-id="fit-life-expectancy-to-infant-mortality">Fit Life Expectancy to Infant Mortality</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a>fit1 <span class="ot">=</span> <span class="fu">lm</span>(infant_survival_rate2000<span class="sc">$</span>life_expectancy <span class="sc">~</span> infant_survival_rate2000<span class="sc">$</span>infant_mortality)</span>
+<span id="cb56-2"><a href="#cb56-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = infant_survival_rate2000$life_expectancy ~ infant_survival_rate2000$infant_mortality)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-22.6651  -3.7087   0.9914   4.0408   8.6817 
+
+Coefficients:
+                                          Estimate Std. Error t value Pr(&gt;|t|)
+(Intercept)                               71.29331    2.42611  29.386  &lt; 2e-16
+infant_survival_rate2000$infant_mortality -0.18916    0.02869  -6.594 2.83e-08
+                                             
+(Intercept)                               ***
+infant_survival_rate2000$infant_mortality ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 6.221 on 49 degrees of freedom
+Multiple R-squared:  0.4701,    Adjusted R-squared:  0.4593 
+F-statistic: 43.48 on 1 and 49 DF,  p-value: 2.826e-08</code></pre>
+</div>
+</div>
+</section>
+<section id="fit-life-expectancy-to-population" class="level3">
+<h3 class="anchored" data-anchor-id="fit-life-expectancy-to-population">Fit Life Expectancy to Population</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" aria-hidden="true" tabindex="-1"></a>fit2 <span class="ot">=</span> <span class="fu">lm</span>(african_mortality2000<span class="sc">$</span>life_expectancy <span class="sc">~</span> african_mortality2000<span class="sc">$</span>population)</span>
+<span id="cb58-2"><a href="#cb58-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = african_mortality2000$life_expectancy ~ african_mortality2000$population)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-18.429  -4.602  -2.568   3.800  18.802 
+
+Coefficients:
+                                  Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)                      5.593e+01  1.468e+00  38.097   &lt;2e-16 ***
+african_mortality2000$population 2.756e-08  5.459e-08   0.505    0.616    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 8.524 on 49 degrees of freedom
+Multiple R-squared:  0.005176,  Adjusted R-squared:  -0.01513 
+F-statistic: 0.2549 on 1 and 49 DF,  p-value: 0.6159</code></pre>
+</div>
+</div>
+<section id="conclusion" class="level4">
+<h4 class="anchored" data-anchor-id="conclusion">Conclusion</h4>
+<p>The African population and life expectancy analysis shows no significant relationship between population size and life expectancy in African countries according to this linear model. The very low R-squared value indicates that population size explains only a tiny fraction of the variation in life expectancy. This suggests that other factors, such as healthcare access, economic conditions, education, and other social determinants, are likely much more important in explaining differences in life expectancy across African countries. TO reiterate, there is tremendous suffering and mortality with the children of the populations however the resiliency of this country has been successfully documented indicating the economics, education and healthcare is improving to continue allowing the population with access to these areas to successfully prosper and survive.</p>
+<p>************************************This section added by Eddie Cruz *************************************</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>fit1 <span class="ot">=</span> <span class="fu">lm</span>(life_expectancy <span class="sc">~</span> <span class="fu">log</span>(infant_mortality), <span class="at">data=</span>infant_survival_rate2000)</span>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = life_expectancy ~ log(infant_mortality), data = infant_survival_rate2000)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-21.079  -3.068   1.157   3.511   8.998 
+
+Coefficients:
+                      Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)            106.765      6.681  15.981  &lt; 2e-16 ***
+log(infant_mortality)  -11.827      1.556  -7.601 7.83e-10 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 5.79 on 49 degrees of freedom
+Multiple R-squared:  0.5411,    Adjusted R-squared:  0.5317 
+F-statistic: 57.77 on 1 and 49 DF,  p-value: 7.827e-10</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb62"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Linear regression</span></span>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>fit1 <span class="ot">=</span> <span class="fu">lm</span>(life_expectancy <span class="sc">~</span> infant_mortality, <span class="at">data=</span>infant_survival_rate2000)</span>
+<span id="cb62-3"><a href="#cb62-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = life_expectancy ~ infant_mortality, data = infant_survival_rate2000)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-22.6651  -3.7087   0.9914   4.0408   8.6817 
+
+Coefficients:
+                 Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)      71.29331    2.42611  29.386  &lt; 2e-16 ***
+infant_mortality -0.18916    0.02869  -6.594 2.83e-08 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 6.221 on 49 degrees of freedom
+Multiple R-squared:  0.4701,    Adjusted R-squared:  0.4593 
+F-statistic: 43.48 on 1 and 49 DF,  p-value: 2.826e-08</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb64"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Polynomial regression of degree 2</span></span>
+<span id="cb64-2"><a href="#cb64-2" aria-hidden="true" tabindex="-1"></a>fit2 <span class="ot">=</span> <span class="fu">lm</span>(life_expectancy <span class="sc">~</span> <span class="fu">poly</span>(infant_mortality, <span class="dv">2</span>), <span class="at">data=</span>infant_survival_rate2000)</span>
+<span id="cb64-3"><a href="#cb64-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = life_expectancy ~ poly(infant_mortality, 2), data = infant_survival_rate2000)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-20.9337  -2.6406   0.6343   3.7509   9.2568 
+
+Coefficients:
+                           Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)                 56.3627     0.7914  71.221  &lt; 2e-16 ***
+poly(infant_mortality, 2)1 -41.0199     5.6516  -7.258 2.96e-09 ***
+poly(infant_mortality, 2)2  19.0567     5.6516   3.372  0.00148 ** 
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 5.652 on 48 degrees of freedom
+Multiple R-squared:  0.5716,    Adjusted R-squared:  0.5538 
+F-statistic: 32.02 on 2 and 48 DF,  p-value: 1.459e-09</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting</span></span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(</span>
+<span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a>  infant_survival_rate2000<span class="sc">$</span>infant_mortality,</span>
+<span id="cb66-4"><a href="#cb66-4" aria-hidden="true" tabindex="-1"></a>  infant_survival_rate2000<span class="sc">$</span>life_expectancy,</span>
+<span id="cb66-5"><a href="#cb66-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">main=</span><span class="st">'Infant Mortality vs Life Expectancy'</span>,</span>
+<span id="cb66-6"><a href="#cb66-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab=</span><span class="st">'Infant Mortality'</span>,</span>
+<span id="cb66-7"><a href="#cb66-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab=</span><span class="st">'Life Expectancy'</span>,</span>
+<span id="cb66-8"><a href="#cb66-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">col=</span><span class="st">'aquamarine'</span>,</span>
+<span id="cb66-9"><a href="#cb66-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">pch=</span><span class="dv">19</span></span>
+<span id="cb66-10"><a href="#cb66-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb66-11"><a href="#cb66-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-12"><a href="#cb66-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Add linear regression line</span></span>
+<span id="cb66-13"><a href="#cb66-13" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(fit1, <span class="at">col=</span><span class="st">'darkblue'</span>)</span>
+<span id="cb66-14"><a href="#cb66-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb66-15"><a href="#cb66-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Add polynomial regression line</span></span>
+<span id="cb66-16"><a href="#cb66-16" aria-hidden="true" tabindex="-1"></a>new_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">infant_mortality =</span> <span class="fu">seq</span>(<span class="fu">min</span>(infant_survival_rate2000<span class="sc">$</span>infant_mortality), <span class="fu">max</span>(infant_survival_rate2000<span class="sc">$</span>infant_mortality), <span class="at">length.out=</span><span class="dv">100</span>))</span>
+<span id="cb66-17"><a href="#cb66-17" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(new_data<span class="sc">$</span>infant_mortality, <span class="fu">predict</span>(fit2, new_data), <span class="at">col=</span><span class="st">'cornflowerblue'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="coding-exercise_files/figure-html/unnamed-chunk-29-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb67"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Logarithmic regression</span></span>
+<span id="cb67-2"><a href="#cb67-2" aria-hidden="true" tabindex="-1"></a>fit2 <span class="ot">=</span> <span class="fu">lm</span>(life_expectancy <span class="sc">~</span> <span class="fu">log</span>(population), <span class="at">data=</span>african_mortality2000)</span>
+<span id="cb67-3"><a href="#cb67-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = life_expectancy ~ log(population), data = african_mortality2000)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-19.113  -4.809  -1.554   3.907  18.863 
+
+Coefficients:
+                Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)      65.3243    12.5203   5.217 3.65e-06 ***
+log(population)  -0.5711     0.7943  -0.719    0.476    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 8.502 on 49 degrees of freedom
+Multiple R-squared:  0.01044,   Adjusted R-squared:  -0.009755 
+F-statistic: 0.517 on 1 and 49 DF,  p-value: 0.4755</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb69"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Linear regression</span></span>
+<span id="cb69-2"><a href="#cb69-2" aria-hidden="true" tabindex="-1"></a>fit1 <span class="ot">=</span> <span class="fu">lm</span>(life_expectancy <span class="sc">~</span> population, <span class="at">data=</span>african_mortality2000)</span>
+<span id="cb69-3"><a href="#cb69-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = life_expectancy ~ population, data = african_mortality2000)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-18.429  -4.602  -2.568   3.800  18.802 
+
+Coefficients:
+             Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept) 5.593e+01  1.468e+00  38.097   &lt;2e-16 ***
+population  2.756e-08  5.459e-08   0.505    0.616    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 8.524 on 49 degrees of freedom
+Multiple R-squared:  0.005176,  Adjusted R-squared:  -0.01513 
+F-statistic: 0.2549 on 1 and 49 DF,  p-value: 0.6159</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb71"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Polynomial regression of degree 2</span></span>
+<span id="cb71-2"><a href="#cb71-2" aria-hidden="true" tabindex="-1"></a>fit2 <span class="ot">=</span> <span class="fu">lm</span>(life_expectancy <span class="sc">~</span> <span class="fu">poly</span>(population, <span class="dv">2</span>), <span class="at">data=</span>african_mortality2000)</span>
+<span id="cb71-3"><a href="#cb71-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = life_expectancy ~ poly(population, 2), data = african_mortality2000)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-18.204  -4.654  -2.329   4.037  18.866 
+
+Coefficients:
+                     Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)            56.363      1.204  46.811   &lt;2e-16 ***
+poly(population, 2)1    4.304      8.599   0.501    0.619    
+poly(population, 2)2   -3.386      8.599  -0.394    0.696    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 8.599 on 48 degrees of freedom
+Multiple R-squared:  0.008379,  Adjusted R-squared:  -0.03294 
+F-statistic: 0.2028 on 2 and 48 DF,  p-value: 0.8171</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting</span></span>
+<span id="cb73-2"><a href="#cb73-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(</span>
+<span id="cb73-3"><a href="#cb73-3" aria-hidden="true" tabindex="-1"></a>  african_mortality2000<span class="sc">$</span>population,</span>
+<span id="cb73-4"><a href="#cb73-4" aria-hidden="true" tabindex="-1"></a>  african_mortality2000<span class="sc">$</span>life_expectancy,</span>
+<span id="cb73-5"><a href="#cb73-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">main=</span><span class="st">'Population vs Life Expectancy'</span>,</span>
+<span id="cb73-6"><a href="#cb73-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab=</span><span class="st">'Population'</span>,</span>
+<span id="cb73-7"><a href="#cb73-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab=</span><span class="st">'Life Expectancy'</span>,</span>
+<span id="cb73-8"><a href="#cb73-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">col=</span><span class="st">'aquamarine'</span>,</span>
+<span id="cb73-9"><a href="#cb73-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">pch=</span><span class="dv">19</span></span>
+<span id="cb73-10"><a href="#cb73-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb73-11"><a href="#cb73-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-12"><a href="#cb73-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Add linear regression line</span></span>
+<span id="cb73-13"><a href="#cb73-13" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(fit1, <span class="at">col=</span><span class="st">'darkblue'</span>)</span>
+<span id="cb73-14"><a href="#cb73-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-15"><a href="#cb73-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Add polynomial regression line</span></span>
+<span id="cb73-16"><a href="#cb73-16" aria-hidden="true" tabindex="-1"></a>new_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">population =</span> <span class="fu">seq</span>(<span class="fu">min</span>(african_mortality2000<span class="sc">$</span>population), </span>
+<span id="cb73-17"><a href="#cb73-17" aria-hidden="true" tabindex="-1"></a>                                        <span class="fu">max</span>(african_mortality2000<span class="sc">$</span>population), <span class="at">length.out=</span><span class="dv">100</span>))</span>
+<span id="cb73-18"><a href="#cb73-18" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(new_data<span class="sc">$</span>population, <span class="fu">predict</span>(fit2, new_data), <span class="at">col=</span><span class="st">'cornflowerblue'</span>)</span>
+<span id="cb73-19"><a href="#cb73-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb73-20"><a href="#cb73-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Add a legend to differentiate the lines</span></span>
+<span id="cb73-21"><a href="#cb73-21" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>, <span class="at">legend=</span><span class="fu">c</span>(<span class="st">"Linear Fit"</span>, <span class="st">"Polynomial Fit (degree 2)"</span>), <span class="at">col=</span><span class="fu">c</span>(<span class="st">"darkblue"</span>, <span class="st">"cornflowerblue"</span>), <span class="at">lwd=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="coding-exercise_files/figure-html/unnamed-chunk-31-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>***********************************Conclusion****************************************************************</p>
+</section>
+</section>
+<section id="help-function-1" class="level3">
+<h3 class="anchored" data-anchor-id="help-function-1">Help Function</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" aria-hidden="true" tabindex="-1"></a><span class="fu">help</span>(<span class="st">"polls_us_election_2016"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="data-structure-overview-1" class="level3">
+<h3 class="anchored" data-anchor-id="data-structure-overview-1">Data Structure Overview</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(polls_us_election_2016)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   4208 obs. of  15 variables:
+ $ state           : Factor w/ 57 levels "Alabama","Alaska",..: 50 50 50 50 50 50 50 50 37 50 ...
+ $ startdate       : Date, format: "2016-11-03" "2016-11-01" ...
+ $ enddate         : Date, format: "2016-11-06" "2016-11-07" ...
+ $ pollster        : Factor w/ 196 levels "ABC News/Washington Post",..: 1 63 81 194 65 55 18 113 195 76 ...
+ $ grade           : Factor w/ 10 levels "D","C-","C","C+",..: 10 6 8 6 5 9 8 8 NA 8 ...
+ $ samplesize      : int  2220 26574 2195 3677 16639 1295 1426 1282 8439 1107 ...
+ $ population      : chr  "lv" "lv" "lv" "lv" ...
+ $ rawpoll_clinton : num  47 38 42 45 47 ...
+ $ rawpoll_trump   : num  43 35.7 39 41 43 ...
+ $ rawpoll_johnson : num  4 5.46 6 5 3 3 5 6 6 7.1 ...
+ $ rawpoll_mcmullin: num  NA NA NA NA NA NA NA NA NA NA ...
+ $ adjpoll_clinton : num  45.2 43.3 42 45.7 46.8 ...
+ $ adjpoll_trump   : num  41.7 41.2 38.8 40.9 42.3 ...
+ $ adjpoll_johnson : num  4.63 5.18 6.84 6.07 3.73 ...
+ $ adjpoll_mcmullin: num  NA NA NA NA NA NA NA NA NA NA ...</code></pre>
+</div>
+</div>
+</section>
+<section id="data-summary-1" class="level3">
+<h3 class="anchored" data-anchor-id="data-summary-1">Data Summary</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(polls_us_election_2016)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            state        startdate             enddate          
+ U.S.          :1106   Min.   :2015-11-06   Min.   :2015-11-08  
+ Florida       : 148   1st Qu.:2016-08-10   1st Qu.:2016-08-21  
+ North Carolina: 125   Median :2016-09-23   Median :2016-09-30  
+ Pennsylvania  : 125   Mean   :2016-08-31   Mean   :2016-09-06  
+ Ohio          : 115   3rd Qu.:2016-10-20   3rd Qu.:2016-10-28  
+ New Hampshire : 112   Max.   :2016-11-06   Max.   :2016-11-07  
+ (Other)       :2477                                            
+                                     pollster        grade     
+ Ipsos                                   : 919   A-     :1085  
+ Google Consumer Surveys                 : 743   B      :1011  
+ SurveyMonkey                            : 660   C-     : 693  
+ YouGov                                  : 130   C+     : 329  
+ Rasmussen Reports/Pulse Opinion Research: 125   B+     : 204  
+ USC Dornsife/LA Times                   : 121   (Other): 457  
+ (Other)                                 :1510   NA's   : 429  
+   samplesize       population        rawpoll_clinton rawpoll_trump  
+ Min.   :   35.0   Length:4208        Min.   :11.04   Min.   : 4.00  
+ 1st Qu.:  447.5   Class :character   1st Qu.:38.00   1st Qu.:35.00  
+ Median :  772.0   Mode  :character   Median :43.00   Median :40.00  
+ Mean   : 1148.2                      Mean   :41.99   Mean   :39.83  
+ 3rd Qu.: 1236.5                      3rd Qu.:46.20   3rd Qu.:45.00  
+ Max.   :84292.0                      Max.   :88.00   Max.   :68.00  
+ NA's   :1                                                           
+ rawpoll_johnson  rawpoll_mcmullin adjpoll_clinton adjpoll_trump   
+ Min.   : 0.000   Min.   : 9.0     Min.   :17.06   Min.   : 4.373  
+ 1st Qu.: 5.400   1st Qu.:22.5     1st Qu.:40.21   1st Qu.:38.429  
+ Median : 7.000   Median :25.0     Median :44.15   Median :42.765  
+ Mean   : 7.382   Mean   :24.0     Mean   :43.32   Mean   :42.674  
+ 3rd Qu.: 9.000   3rd Qu.:27.9     3rd Qu.:46.92   3rd Qu.:46.290  
+ Max.   :25.000   Max.   :31.0     Max.   :86.77   Max.   :72.433  
+ NA's   :1409     NA's   :4178                                     
+ adjpoll_johnson  adjpoll_mcmullin
+ Min.   :-3.668   Min.   :11.03   
+ 1st Qu.: 3.145   1st Qu.:23.11   
+ Median : 4.384   Median :25.14   
+ Mean   : 4.660   Mean   :24.51   
+ 3rd Qu.: 5.756   3rd Qu.:27.98   
+ Max.   :20.367   Max.   :31.57   
+ NA's   :1409     NA's   :4178    </code></pre>
+</div>
+</div>
+</section>
+<section id="class-functions---object-determination-1" class="level3">
+<h3 class="anchored" data-anchor-id="class-functions---object-determination-1">Class Functions - Object Determination</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(polls_us_election_2016)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "data.frame"</code></pre>
+</div>
+</div>
+</section>
+<section id="view-data-set" class="level3">
+<h3 class="anchored" data-anchor-id="view-data-set">View data set</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="fu">view</span>(polls_us_election_2016)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="processing-data-1" class="level2">
+<h2 class="anchored" data-anchor-id="processing-data-1">Processing Data</h2>
+<section id="assign-only-u.s.-to-a-new-objectvariable." class="level3">
+<h3 class="anchored" data-anchor-id="assign-only-u.s.-to-a-new-objectvariable.">Assign only U.S. to a new object/variable.</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1" aria-hidden="true" tabindex="-1"></a>vote_data <span class="ot">=</span> <span class="fu">filter</span>(polls_us_election_2016,  state <span class="sc">==</span> <span class="st">'U.S.'</span>)</span>
+<span id="cb82-2"><a href="#cb82-2" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(vote_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  state  startdate    enddate
+1  U.S. 2016-11-03 2016-11-06
+2  U.S. 2016-11-01 2016-11-07
+3  U.S. 2016-11-02 2016-11-06
+4  U.S. 2016-11-04 2016-11-07
+5  U.S. 2016-11-03 2016-11-06
+6  U.S. 2016-11-03 2016-11-06
+                                                    pollster grade samplesize
+1                                   ABC News/Washington Post    A+       2220
+2                                    Google Consumer Surveys     B      26574
+3                                                      Ipsos    A-       2195
+4                                                     YouGov     B       3677
+5                                           Gravis Marketing    B-      16639
+6 Fox News/Anderson Robbins Research/Shaw &amp; Company Research     A       1295
+  population rawpoll_clinton rawpoll_trump rawpoll_johnson rawpoll_mcmullin
+1         lv           47.00         43.00            4.00               NA
+2         lv           38.03         35.69            5.46               NA
+3         lv           42.00         39.00            6.00               NA
+4         lv           45.00         41.00            5.00               NA
+5         rv           47.00         43.00            3.00               NA
+6         lv           48.00         44.00            3.00               NA
+  adjpoll_clinton adjpoll_trump adjpoll_johnson adjpoll_mcmullin
+1        45.20163      41.72430        4.626221               NA
+2        43.34557      41.21439        5.175792               NA
+3        42.02638      38.81620        6.844734               NA
+4        45.65676      40.92004        6.069454               NA
+5        46.84089      42.33184        3.726098               NA
+6        49.02208      43.95631        3.057876               NA</code></pre>
+</div>
+</div>
+</section>
+<section id="u.s.-data-structure-overview" class="level3">
+<h3 class="anchored" data-anchor-id="u.s.-data-structure-overview">U.S. Data Structure Overview</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(vote_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   1106 obs. of  15 variables:
+ $ state           : Factor w/ 57 levels "Alabama","Alaska",..: 50 50 50 50 50 50 50 50 50 50 ...
+ $ startdate       : Date, format: "2016-11-03" "2016-11-01" ...
+ $ enddate         : Date, format: "2016-11-06" "2016-11-07" ...
+ $ pollster        : Factor w/ 196 levels "ABC News/Washington Post",..: 1 63 81 194 65 55 18 113 76 148 ...
+ $ grade           : Factor w/ 10 levels "D","C-","C","C+",..: 10 6 8 6 5 9 8 8 8 10 ...
+ $ samplesize      : int  2220 26574 2195 3677 16639 1295 1426 1282 1107 799 ...
+ $ population      : chr  "lv" "lv" "lv" "lv" ...
+ $ rawpoll_clinton : num  47 38 42 45 47 ...
+ $ rawpoll_trump   : num  43 35.7 39 41 43 ...
+ $ rawpoll_johnson : num  4 5.46 6 5 3 3 5 6 7.1 4 ...
+ $ rawpoll_mcmullin: num  NA NA NA NA NA NA NA NA NA NA ...
+ $ adjpoll_clinton : num  45.2 43.3 42 45.7 46.8 ...
+ $ adjpoll_trump   : num  41.7 41.2 38.8 40.9 42.3 ...
+ $ adjpoll_johnson : num  4.63 5.18 6.84 6.07 3.73 ...
+ $ adjpoll_mcmullin: num  NA NA NA NA NA NA NA NA NA NA ...</code></pre>
+</div>
+</div>
+</section>
+<section id="u.s.-summary" class="level3">
+<h3 class="anchored" data-anchor-id="u.s.-summary">U.S. Summary</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(vote_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>        state        startdate             enddate          
+ U.S.      :1106   Min.   :2015-11-13   Min.   :2015-11-16  
+ Alabama   :   0   1st Qu.:2016-05-30   1st Qu.:2016-06-02  
+ Alaska    :   0   Median :2016-08-11   Median :2016-08-16  
+ Arizona   :   0   Mean   :2016-07-18   Mean   :2016-07-23  
+ Arkansas  :   0   3rd Qu.:2016-09-29   3rd Qu.:2016-10-03  
+ California:   0   Max.   :2016-11-05   Max.   :2016-11-07  
+ (Other)   :   0                                            
+                                     pollster       grade       samplesize   
+ Ipsos                                   :325   A-     :405   Min.   :  250  
+ USC Dornsife/LA Times                   :121   C+     :182   1st Qu.: 1083  
+ CVOTER International                    :115   B      : 54   Median : 1316  
+ The Times-Picayune/Lucid                : 95   C-     : 42   Mean   : 2305  
+ Morning Consult                         : 53   A+     : 38   3rd Qu.: 1824  
+ Rasmussen Reports/Pulse Opinion Research: 51   (Other): 97   Max.   :84292  
+ (Other)                                 :346   NA's   :288                  
+  population        rawpoll_clinton rawpoll_trump   rawpoll_johnson 
+ Length:1106        Min.   :31.00   Min.   :28.80   Min.   : 2.000  
+ Class :character   1st Qu.:42.00   1st Qu.:36.00   1st Qu.: 6.000  
+ Mode  :character   Median :44.00   Median :39.00   Median : 7.000  
+                    Mean   :43.99   Mean   :39.64   Mean   : 7.019  
+                    3rd Qu.:46.00   3rd Qu.:43.48   3rd Qu.: 8.000  
+                    Max.   :57.70   Max.   :51.00   Max.   :13.000  
+                                                    NA's   :553     
+ rawpoll_mcmullin adjpoll_clinton adjpoll_trump   adjpoll_johnson 
+ Min.   : NA      Min.   :35.90   Min.   :29.73   Min.   :0.5905  
+ 1st Qu.: NA      1st Qu.:43.36   1st Qu.:39.72   1st Qu.:3.1490  
+ Median : NA      Median :44.91   Median :42.32   Median :4.0687  
+ Mean   :NaN      Mean   :44.88   Mean   :41.68   Mean   :4.0554  
+ 3rd Qu.: NA      3rd Qu.:46.52   3rd Qu.:44.05   3rd Qu.:4.9076  
+ Max.   : NA      Max.   :56.73   Max.   :50.61   Max.   :9.3203  
+ NA's   :1106                                     NA's   :553     
+ adjpoll_mcmullin
+ Min.   : NA     
+ 1st Qu.: NA     
+ Median : NA     
+ Mean   :NaN     
+ 3rd Qu.: NA     
+ Max.   : NA     
+ NA's   :1106    </code></pre>
+</div>
+</div>
+</section>
+<section id="adjusted-poll-object" class="level3">
+<h3 class="anchored" data-anchor-id="adjusted-poll-object">Adjusted Poll Object</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1" aria-hidden="true" tabindex="-1"></a>adjusted_polls <span class="ot">=</span> vote_data <span class="sc">%&gt;%</span></span>
+<span id="cb88-2"><a href="#cb88-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(adjpoll_clinton,adjpoll_trump )</span>
+<span id="cb88-3"><a href="#cb88-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(adjusted_polls)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  adjpoll_clinton adjpoll_trump
+1        45.20163      41.72430
+2        43.34557      41.21439
+3        42.02638      38.81620
+4        45.65676      40.92004
+5        46.84089      42.33184
+6        49.02208      43.95631</code></pre>
+</div>
+</div>
+</section>
+<section id="adjusted-poll-data-structure" class="level3">
+<h3 class="anchored" data-anchor-id="adjusted-poll-data-structure">Adjusted Poll Data Structure</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(adjusted_polls)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   1106 obs. of  2 variables:
+ $ adjpoll_clinton: num  45.2 43.3 42 45.7 46.8 ...
+ $ adjpoll_trump  : num  41.7 41.2 38.8 40.9 42.3 ...</code></pre>
+</div>
+</div>
+</section>
+<section id="adjusted-poll-data-summary" class="level3">
+<h3 class="anchored" data-anchor-id="adjusted-poll-data-summary">Adjusted Poll Data Summary</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(adjusted_polls)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> adjpoll_clinton adjpoll_trump  
+ Min.   :35.90   Min.   :29.73  
+ 1st Qu.:43.36   1st Qu.:39.72  
+ Median :44.91   Median :42.32  
+ Mean   :44.88   Mean   :41.68  
+ 3rd Qu.:46.52   3rd Qu.:44.05  
+ Max.   :56.73   Max.   :50.61  </code></pre>
+</div>
+</div>
+</section>
+<section id="raw-poll-object" class="level3">
+<h3 class="anchored" data-anchor-id="raw-poll-object">Raw Poll Object</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb94"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1" aria-hidden="true" tabindex="-1"></a>raw_polls <span class="ot">=</span> vote_data <span class="sc">%&gt;%</span></span>
+<span id="cb94-2"><a href="#cb94-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(rawpoll_clinton,rawpoll_trump )</span>
+<span id="cb94-3"><a href="#cb94-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(raw_polls)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  rawpoll_clinton rawpoll_trump
+1           47.00         43.00
+2           38.03         35.69
+3           42.00         39.00
+4           45.00         41.00
+5           47.00         43.00
+6           48.00         44.00</code></pre>
+</div>
+</div>
+</section>
+<section id="raw-poll-data-structure" class="level3">
+<h3 class="anchored" data-anchor-id="raw-poll-data-structure">Raw Poll Data Structure</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb96"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(raw_polls)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>'data.frame':   1106 obs. of  2 variables:
+ $ rawpoll_clinton: num  47 38 42 45 47 ...
+ $ rawpoll_trump  : num  43 35.7 39 41 43 ...</code></pre>
+</div>
+</div>
+</section>
+<section id="raw-poll-data-summary" class="level3">
+<h3 class="anchored" data-anchor-id="raw-poll-data-summary">Raw Poll Data Summary</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb98"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(raw_polls)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> rawpoll_clinton rawpoll_trump  
+ Min.   :31.00   Min.   :28.80  
+ 1st Qu.:42.00   1st Qu.:36.00  
+ Median :44.00   Median :39.00  
+ Mean   :43.99   Mean   :39.64  
+ 3rd Qu.:46.00   3rd Qu.:43.48  
+ Max.   :57.70   Max.   :51.00  </code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="plotting-1" class="level2">
+<h2 class="anchored" data-anchor-id="plotting-1">Plotting</h2>
+<section id="adjusted-poll-as-a-function-for-trump-clinton" class="level3">
+<h3 class="anchored" data-anchor-id="adjusted-poll-as-a-function-for-trump-clinton">Adjusted Poll as a Function for Trump &amp; Clinton</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb100"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform linear regression</span></span>
+<span id="cb100-2"><a href="#cb100-2" aria-hidden="true" tabindex="-1"></a>regression <span class="ot">=</span> <span class="fu">lm</span>(adjusted_polls<span class="sc">$</span>adjpoll_clinton <span class="sc">~</span> adjusted_polls<span class="sc">$</span>adjpoll_trump)</span>
+<span id="cb100-3"><a href="#cb100-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb100-4"><a href="#cb100-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to calculate R-squared</span></span>
+<span id="cb100-5"><a href="#cb100-5" aria-hidden="true" tabindex="-1"></a>rsq <span class="ot">&lt;-</span> <span class="cf">function</span>() <span class="fu">summary</span>(regression)<span class="sc">$</span>r.squared</span>
+<span id="cb100-6"><a href="#cb100-6" aria-hidden="true" tabindex="-1"></a>r_square <span class="ot">=</span> <span class="fu">round</span>(<span class="fu">rsq</span>(), <span class="dv">3</span>)</span>
+<span id="cb100-7"><a href="#cb100-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb100-8"><a href="#cb100-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Get regression coefficients</span></span>
+<span id="cb100-9"><a href="#cb100-9" aria-hidden="true" tabindex="-1"></a>coeff <span class="ot">=</span> <span class="fu">round</span>(<span class="fu">summary</span>(regression)<span class="sc">$</span>coefficients[<span class="dv">2</span>, <span class="dv">1</span>], <span class="dv">3</span>)</span>
+<span id="cb100-10"><a href="#cb100-10" aria-hidden="true" tabindex="-1"></a>y_int <span class="ot">=</span> <span class="fu">round</span>(<span class="fu">summary</span>(regression)<span class="sc">$</span>coefficients[<span class="dv">1</span>, <span class="dv">1</span>], <span class="dv">3</span>)</span>
+<span id="cb100-11"><a href="#cb100-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb100-12"><a href="#cb100-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Create plot</span></span>
+<span id="cb100-13"><a href="#cb100-13" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(</span>
+<span id="cb100-14"><a href="#cb100-14" aria-hidden="true" tabindex="-1"></a>  adjusted_polls<span class="sc">$</span>adjpoll_trump,</span>
+<span id="cb100-15"><a href="#cb100-15" aria-hidden="true" tabindex="-1"></a>  adjusted_polls<span class="sc">$</span>adjpoll_clinton,</span>
+<span id="cb100-16"><a href="#cb100-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">main=</span><span class="st">'Adjusted Polls Trump &amp; Clinton'</span>,</span>
+<span id="cb100-17"><a href="#cb100-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab=</span><span class="st">'Adjusted Trump Poll'</span>,</span>
+<span id="cb100-18"><a href="#cb100-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab=</span><span class="st">'Adjusted Clinton Poll'</span>,</span>
+<span id="cb100-19"><a href="#cb100-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">col=</span><span class="st">'lightgreen'</span>,</span>
+<span id="cb100-20"><a href="#cb100-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">bg=</span><span class="st">'olivedrab3'</span>,</span>
+<span id="cb100-21"><a href="#cb100-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">pch =</span> <span class="dv">21</span></span>
+<span id="cb100-22"><a href="#cb100-22" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb100-23"><a href="#cb100-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb100-24"><a href="#cb100-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Add regression equation and R-squared value to the plot</span></span>
+<span id="cb100-25"><a href="#cb100-25" aria-hidden="true" tabindex="-1"></a>rsq_str <span class="ot">=</span> <span class="fu">expression</span>(<span class="fu">paste</span>(<span class="st">"R"</span><span class="sc">^</span><span class="dv">2</span>, <span class="st">": "</span>))</span>
+<span id="cb100-26"><a href="#cb100-26" aria-hidden="true" tabindex="-1"></a>rsq_str <span class="ot">=</span> <span class="st">"r2: "</span></span>
+<span id="cb100-27"><a href="#cb100-27" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="dv">47</span>, <span class="dv">55</span>, <span class="fu">paste0</span>(<span class="st">'y = '</span>, coeff, <span class="st">'x + '</span>, y_int), <span class="at">cex=</span><span class="fl">0.75</span>)</span>
+<span id="cb100-28"><a href="#cb100-28" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="dv">47</span>, <span class="dv">54</span>, <span class="fu">bquote</span>(.(rsq_str) <span class="sc">*</span> .(r_square)), <span class="at">cex=</span><span class="fl">0.75</span>)</span>
+<span id="cb100-29"><a href="#cb100-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb100-30"><a href="#cb100-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Add regression line</span></span>
+<span id="cb100-31"><a href="#cb100-31" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(regression, <span class="at">col=</span><span class="st">'darkblue'</span>, <span class="at">lwd=</span><span class="fl">1.75</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="coding-exercise_files/figure-html/unnamed-chunk-46-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="raw-polls-as-a-function-for-trump-clinton" class="level3">
+<h3 class="anchored" data-anchor-id="raw-polls-as-a-function-for-trump-clinton">Raw Polls as a Function for Trump &amp; Clinton</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb101"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb101-1"><a href="#cb101-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Perform linear regression</span></span>
+<span id="cb101-2"><a href="#cb101-2" aria-hidden="true" tabindex="-1"></a>regression <span class="ot">=</span> <span class="fu">lm</span>(raw_polls<span class="sc">$</span>rawpoll_clinton <span class="sc">~</span> raw_polls<span class="sc">$</span>rawpoll_trump)</span>
+<span id="cb101-3"><a href="#cb101-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb101-4"><a href="#cb101-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Function to calculate R-squared</span></span>
+<span id="cb101-5"><a href="#cb101-5" aria-hidden="true" tabindex="-1"></a>rsq <span class="ot">&lt;-</span> <span class="cf">function</span>() <span class="fu">summary</span>(regression)<span class="sc">$</span>r.squared</span>
+<span id="cb101-6"><a href="#cb101-6" aria-hidden="true" tabindex="-1"></a>r_square <span class="ot">=</span> <span class="fu">round</span>(<span class="fu">rsq</span>(), <span class="dv">3</span>)</span>
+<span id="cb101-7"><a href="#cb101-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb101-8"><a href="#cb101-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Get regression coefficients</span></span>
+<span id="cb101-9"><a href="#cb101-9" aria-hidden="true" tabindex="-1"></a>coeff <span class="ot">=</span> <span class="fu">round</span>(<span class="fu">summary</span>(regression)<span class="sc">$</span>coefficients[<span class="dv">2</span>, <span class="dv">1</span>], <span class="dv">9</span>)</span>
+<span id="cb101-10"><a href="#cb101-10" aria-hidden="true" tabindex="-1"></a>y_int <span class="ot">=</span> <span class="fu">round</span>(<span class="fu">summary</span>(regression)<span class="sc">$</span>coefficients[<span class="dv">1</span>, <span class="dv">1</span>], <span class="dv">3</span>)</span>
+<span id="cb101-11"><a href="#cb101-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb101-12"><a href="#cb101-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Create plot</span></span>
+<span id="cb101-13"><a href="#cb101-13" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(</span>
+<span id="cb101-14"><a href="#cb101-14" aria-hidden="true" tabindex="-1"></a>  raw_polls<span class="sc">$</span>rawpoll_trump,</span>
+<span id="cb101-15"><a href="#cb101-15" aria-hidden="true" tabindex="-1"></a>  raw_polls<span class="sc">$</span>rawpoll_clinton,</span>
+<span id="cb101-16"><a href="#cb101-16" aria-hidden="true" tabindex="-1"></a>  <span class="at">main=</span><span class="st">'Raw Polls Trump &amp; Clinton'</span>,</span>
+<span id="cb101-17"><a href="#cb101-17" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab=</span><span class="st">'Raw Trump Poll'</span>,</span>
+<span id="cb101-18"><a href="#cb101-18" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab=</span><span class="st">'Raw Clinton Poll'</span>,</span>
+<span id="cb101-19"><a href="#cb101-19" aria-hidden="true" tabindex="-1"></a>  <span class="at">col=</span><span class="st">'lightgreen'</span>,</span>
+<span id="cb101-20"><a href="#cb101-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">bg=</span><span class="st">'olivedrab3'</span>,</span>
+<span id="cb101-21"><a href="#cb101-21" aria-hidden="true" tabindex="-1"></a>  <span class="at">pch =</span> <span class="dv">21</span></span>
+<span id="cb101-22"><a href="#cb101-22" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb101-23"><a href="#cb101-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb101-24"><a href="#cb101-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Add regression equation and R-squared value to the plot</span></span>
+<span id="cb101-25"><a href="#cb101-25" aria-hidden="true" tabindex="-1"></a>rsq_str <span class="ot">=</span> <span class="fu">expression</span>(<span class="fu">paste</span>(<span class="st">"R"</span><span class="sc">^</span><span class="dv">2</span>, <span class="st">": "</span>))</span>
+<span id="cb101-26"><a href="#cb101-26" aria-hidden="true" tabindex="-1"></a>rsq_str <span class="ot">=</span> <span class="st">"r2: "</span></span>
+<span id="cb101-27"><a href="#cb101-27" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="dv">47</span>, <span class="dv">55</span>, <span class="fu">paste0</span>(<span class="st">'y = '</span>, coeff, <span class="st">'x + '</span>, y_int), <span class="at">cex=</span><span class="fl">0.75</span>)</span>
+<span id="cb101-28"><a href="#cb101-28" aria-hidden="true" tabindex="-1"></a><span class="fu">text</span>(<span class="dv">47</span>, <span class="dv">53</span>, <span class="fu">bquote</span>(.(rsq_str) <span class="sc">*</span> .(r_square)), <span class="at">cex=</span><span class="fl">0.75</span>)</span>
+<span id="cb101-29"><a href="#cb101-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb101-30"><a href="#cb101-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Add regression line</span></span>
+<span id="cb101-31"><a href="#cb101-31" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(regression, <span class="at">col=</span><span class="st">'darkblue'</span>, <span class="at">lwd=</span><span class="fl">1.75</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="coding-exercise_files/figure-html/unnamed-chunk-47-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>****************************interpret the clinton and trump raw results************************************************ There exists a positive correlation: the slight positive correlation between Trumps and Clinton’s poll numbers, meaning that as Trump’s poll numbers increase, Clinton’s poll numbers tend to increase slightly as well. The low R^2(0.106) suggest that approximatley 10.6% of the variation in Clinton’s poll numbers can be explained by Trumps poll numbers. Indicative of a week positive realtionship between two variables. #Additional Data Processing to determine any missing data or NA #None Found</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb102"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb102-1"><a href="#cb102-1" aria-hidden="true" tabindex="-1"></a>miss_adj_polls<span class="ot">=</span>vote_data<span class="sc">%&gt;%</span></span>
+<span id="cb102-2"><a href="#cb102-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">is.na</span>(adjpoll_clinton))</span>
+<span id="cb102-3"><a href="#cb102-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(miss_adj_polls)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] state            startdate        enddate          pollster        
+ [5] grade            samplesize       population       rawpoll_clinton 
+ [9] rawpoll_trump    rawpoll_johnson  rawpoll_mcmullin adjpoll_clinton 
+[13] adjpoll_trump    adjpoll_johnson  adjpoll_mcmullin
+&lt;0 rows&gt; (or 0-length row.names)</code></pre>
+</div>
+</div>
+<p>#Additional Data Processing to determine any missing data or NA #None Found</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb104"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb104-1"><a href="#cb104-1" aria-hidden="true" tabindex="-1"></a>miss_adj_polls<span class="ot">=</span>vote_data<span class="sc">%&gt;%</span></span>
+<span id="cb104-2"><a href="#cb104-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">is.na</span>(adjpoll_trump))</span>
+<span id="cb104-3"><a href="#cb104-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(miss_adj_polls)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] state            startdate        enddate          pollster        
+ [5] grade            samplesize       population       rawpoll_clinton 
+ [9] rawpoll_trump    rawpoll_johnson  rawpoll_mcmullin adjpoll_clinton 
+[13] adjpoll_trump    adjpoll_johnson  adjpoll_mcmullin
+&lt;0 rows&gt; (or 0-length row.names)</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb106"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb106-1"><a href="#cb106-1" aria-hidden="true" tabindex="-1"></a>miss_raw_polls<span class="ot">=</span>vote_data<span class="sc">%&gt;%</span></span>
+<span id="cb106-2"><a href="#cb106-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">is.na</span>(rawpoll_clinton))</span>
+<span id="cb106-3"><a href="#cb106-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(miss_raw_polls)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] state            startdate        enddate          pollster        
+ [5] grade            samplesize       population       rawpoll_clinton 
+ [9] rawpoll_trump    rawpoll_johnson  rawpoll_mcmullin adjpoll_clinton 
+[13] adjpoll_trump    adjpoll_johnson  adjpoll_mcmullin
+&lt;0 rows&gt; (or 0-length row.names)</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb108"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb108-1"><a href="#cb108-1" aria-hidden="true" tabindex="-1"></a>miss_raw_polls<span class="ot">=</span>vote_data<span class="sc">%&gt;%</span></span>
+<span id="cb108-2"><a href="#cb108-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="fu">is.na</span>(rawpoll_trump))</span>
+<span id="cb108-3"><a href="#cb108-3" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(miss_raw_polls)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] state            startdate        enddate          pollster        
+ [5] grade            samplesize       population       rawpoll_clinton 
+ [9] rawpoll_trump    rawpoll_johnson  rawpoll_mcmullin adjpoll_clinton 
+[13] adjpoll_trump    adjpoll_johnson  adjpoll_mcmullin
+&lt;0 rows&gt; (or 0-length row.names)</code></pre>
+</div>
+</div>
+<p>Fit Adjusted Poll for Clinton and Trump</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb110"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb110-1"><a href="#cb110-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Log Regression</span></span>
+<span id="cb110-2"><a href="#cb110-2" aria-hidden="true" tabindex="-1"></a>fit1 <span class="ot">=</span> <span class="fu">lm</span>(adjpoll_clinton <span class="sc">~</span> <span class="fu">log</span>(adjpoll_trump), <span class="at">data=</span>adjusted_polls)</span>
+<span id="cb110-3"><a href="#cb110-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = adjpoll_clinton ~ log(adjpoll_trump), data = adjusted_polls)
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+-8.351 -1.510 -0.023  1.522 12.874 
+
+Coefficients:
+                   Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)         15.4791     3.2342   4.786 1.93e-06 ***
+log(adjpoll_trump)   7.8899     0.8677   9.093  &lt; 2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 2.37 on 1104 degrees of freedom
+Multiple R-squared:  0.06968,   Adjusted R-squared:  0.06884 
+F-statistic: 82.69 on 1 and 1104 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb112"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb112-1"><a href="#cb112-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Linear regression</span></span>
+<span id="cb112-2"><a href="#cb112-2" aria-hidden="true" tabindex="-1"></a>fit1 <span class="ot">=</span> <span class="fu">lm</span>(adjpoll_clinton <span class="sc">~</span> adjpoll_trump, <span class="at">data=</span>adjusted_polls)</span>
+<span id="cb112-3"><a href="#cb112-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = adjpoll_clinton ~ adjpoll_trump, data = adjusted_polls)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-8.3185 -1.5035 -0.0313  1.5211 12.8768 
+
+Coefficients:
+              Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)   36.63686    0.89965  40.724   &lt;2e-16 ***
+adjpoll_trump  0.19784    0.02152   9.194   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 2.368 on 1104 degrees of freedom
+Multiple R-squared:  0.07112,   Adjusted R-squared:  0.07028 
+F-statistic: 84.53 on 1 and 1104 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb114"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb114-1"><a href="#cb114-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Polynomial regression of degree 2</span></span>
+<span id="cb114-2"><a href="#cb114-2" aria-hidden="true" tabindex="-1"></a>fit2 <span class="ot">=</span> <span class="fu">lm</span>(adjpoll_clinton <span class="sc">~</span> <span class="fu">poly</span>(adjpoll_trump, <span class="dv">2</span>), <span class="at">data=</span>adjusted_polls)</span>
+<span id="cb114-3"><a href="#cb114-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = adjpoll_clinton ~ poly(adjpoll_trump, 2), data = adjusted_polls)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-8.2349 -1.4850 -0.0319  1.5434 12.8397 
+
+Coefficients:
+                        Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)             44.88205    0.07118 630.515   &lt;2e-16 ***
+poly(adjpoll_trump, 2)1 21.77507    2.36731   9.198   &lt;2e-16 ***
+poly(adjpoll_trump, 2)2  3.41199    2.36731   1.441     0.15    
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 2.367 on 1103 degrees of freedom
+Multiple R-squared:  0.07286,   Adjusted R-squared:  0.07118 
+F-statistic: 43.34 on 2 and 1103 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb116"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb116-1"><a href="#cb116-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the data</span></span>
+<span id="cb116-2"><a href="#cb116-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(</span>
+<span id="cb116-3"><a href="#cb116-3" aria-hidden="true" tabindex="-1"></a>  adjusted_polls<span class="sc">$</span>adjpoll_trump,</span>
+<span id="cb116-4"><a href="#cb116-4" aria-hidden="true" tabindex="-1"></a>  adjusted_polls<span class="sc">$</span>adjpoll_clinton,</span>
+<span id="cb116-5"><a href="#cb116-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">main=</span><span class="st">'Adjusted Polls: Linear and Polynomial Regression'</span>,</span>
+<span id="cb116-6"><a href="#cb116-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab=</span><span class="st">'adjpoll_trump'</span>,</span>
+<span id="cb116-7"><a href="#cb116-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab=</span><span class="st">'adjpoll_clinton'</span>,</span>
+<span id="cb116-8"><a href="#cb116-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">col=</span><span class="st">'lightgreen'</span>,</span>
+<span id="cb116-9"><a href="#cb116-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">bg=</span><span class="st">'olivedrab3'</span>,</span>
+<span id="cb116-10"><a href="#cb116-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">pch =</span> <span class="dv">21</span></span>
+<span id="cb116-11"><a href="#cb116-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb116-12"><a href="#cb116-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb116-13"><a href="#cb116-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Add linear regression line</span></span>
+<span id="cb116-14"><a href="#cb116-14" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(fit1, <span class="at">col=</span><span class="st">'red'</span>, <span class="at">lwd=</span><span class="dv">2</span>)</span>
+<span id="cb116-15"><a href="#cb116-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb116-16"><a href="#cb116-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Add polynomial regression line</span></span>
+<span id="cb116-17"><a href="#cb116-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate a sequence of values for adjpoll_trump for the polynomial line</span></span>
+<span id="cb116-18"><a href="#cb116-18" aria-hidden="true" tabindex="-1"></a>new_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">adjpoll_trump =</span> <span class="fu">seq</span>(<span class="fu">min</span>(adjusted_polls<span class="sc">$</span>adjpoll_trump), <span class="fu">max</span>(adjusted_polls<span class="sc">$</span>adjpoll_trump), <span class="at">length.out=</span><span class="dv">100</span>))</span>
+<span id="cb116-19"><a href="#cb116-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Predict the values of adjpoll_clinton for the generated sequence</span></span>
+<span id="cb116-20"><a href="#cb116-20" aria-hidden="true" tabindex="-1"></a>poly_pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(fit2, new_data)</span>
+<span id="cb116-21"><a href="#cb116-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Add the polynomial regression line to the plot</span></span>
+<span id="cb116-22"><a href="#cb116-22" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(new_data<span class="sc">$</span>adjpoll_trump, poly_pred, <span class="at">col=</span><span class="st">'blue'</span>, <span class="at">lwd=</span><span class="dv">2</span>)</span>
+<span id="cb116-23"><a href="#cb116-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb116-24"><a href="#cb116-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Add a legend to differentiate the lines</span></span>
+<span id="cb116-25"><a href="#cb116-25" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>, <span class="at">legend=</span><span class="fu">c</span>(<span class="st">"Linear Fit"</span>, <span class="st">"Polynomial Fit (degree 2)"</span>), <span class="at">col=</span><span class="fu">c</span>(<span class="st">"red"</span>, <span class="st">"blue"</span>), <span class="at">lwd=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="coding-exercise_files/figure-html/unnamed-chunk-53-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="fit-raw-poll" class="level3">
+<h3 class="anchored" data-anchor-id="fit-raw-poll">Fit Raw Poll</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb117"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb117-1"><a href="#cb117-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Log Regression</span></span>
+<span id="cb117-2"><a href="#cb117-2" aria-hidden="true" tabindex="-1"></a>fit2 <span class="ot">=</span> <span class="fu">lm</span>(rawpoll_clinton <span class="sc">~</span> <span class="fu">log</span>(rawpoll_trump), <span class="at">data=</span>vote_data)</span>
+<span id="cb117-3"><a href="#cb117-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = rawpoll_clinton ~ log(rawpoll_trump), data = vote_data)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-11.6571  -2.1174  -0.1328   2.0872  15.4526 
+
+Coefficients:
+                   Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)         10.6365     3.0074   3.537 0.000422 ***
+log(rawpoll_trump)   9.0804     0.8183  11.096  &lt; 2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 3.12 on 1104 degrees of freedom
+Multiple R-squared:  0.1003,    Adjusted R-squared:  0.09952 
+F-statistic: 123.1 on 1 and 1104 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb119"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb119-1"><a href="#cb119-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Linear regression</span></span>
+<span id="cb119-2"><a href="#cb119-2" aria-hidden="true" tabindex="-1"></a>fit1 <span class="ot">=</span> <span class="fu">lm</span>(rawpoll_clinton <span class="sc">~</span> rawpoll_trump, <span class="at">data=</span>raw_polls)</span>
+<span id="cb119-3"><a href="#cb119-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = rawpoll_clinton ~ rawpoll_trump, data = raw_polls)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-11.6669  -2.0756  -0.0813   2.0966  15.3852 
+
+Coefficients:
+              Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)   34.68457    0.81985   42.31   &lt;2e-16 ***
+rawpoll_trump  0.23478    0.02055   11.43   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 3.11 on 1104 degrees of freedom
+Multiple R-squared:  0.1057,    Adjusted R-squared:  0.1049 
+F-statistic: 130.5 on 1 and 1104 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb121"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb121-1"><a href="#cb121-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Polynomial regression of degree 2</span></span>
+<span id="cb121-2"><a href="#cb121-2" aria-hidden="true" tabindex="-1"></a>fit2 <span class="ot">=</span> <span class="fu">lm</span>(rawpoll_clinton <span class="sc">~</span> <span class="fu">poly</span>(rawpoll_trump, <span class="dv">2</span>), <span class="at">data=</span>raw_polls)</span>
+<span id="cb121-3"><a href="#cb121-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(fit2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = rawpoll_clinton ~ poly(rawpoll_trump, 2), data = raw_polls)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-11.9762  -1.9498  -0.0539   1.9951  14.6987 
+
+Coefficients:
+                        Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)             43.98993    0.09277 474.176  &lt; 2e-16 ***
+poly(rawpoll_trump, 2)1 35.53508    3.08525  11.518  &lt; 2e-16 ***
+poly(rawpoll_trump, 2)2 13.46627    3.08525   4.365 1.39e-05 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 3.085 on 1103 degrees of freedom
+Multiple R-squared:  0.1209,    Adjusted R-squared:  0.1193 
+F-statistic: 75.85 on 2 and 1103 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb123"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb123-1"><a href="#cb123-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot the data</span></span>
+<span id="cb123-2"><a href="#cb123-2" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(</span>
+<span id="cb123-3"><a href="#cb123-3" aria-hidden="true" tabindex="-1"></a>  raw_polls<span class="sc">$</span>rawpoll_trump,</span>
+<span id="cb123-4"><a href="#cb123-4" aria-hidden="true" tabindex="-1"></a>  raw_polls<span class="sc">$</span>rawpoll_clinton,</span>
+<span id="cb123-5"><a href="#cb123-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">main=</span><span class="st">'Raw Polls: Linear and Polynomial Regression'</span>,</span>
+<span id="cb123-6"><a href="#cb123-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab=</span><span class="st">'rawpoll_trump'</span>,</span>
+<span id="cb123-7"><a href="#cb123-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab=</span><span class="st">'rawpoll_clinton'</span>,</span>
+<span id="cb123-8"><a href="#cb123-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">col=</span><span class="st">'lightgreen'</span>,</span>
+<span id="cb123-9"><a href="#cb123-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">bg=</span><span class="st">'olivedrab3'</span>,</span>
+<span id="cb123-10"><a href="#cb123-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">pch =</span> <span class="dv">21</span></span>
+<span id="cb123-11"><a href="#cb123-11" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb123-12"><a href="#cb123-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb123-13"><a href="#cb123-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Add linear regression line</span></span>
+<span id="cb123-14"><a href="#cb123-14" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(fit1, <span class="at">col=</span><span class="st">'red'</span>, <span class="at">lwd=</span><span class="dv">2</span>)</span>
+<span id="cb123-15"><a href="#cb123-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb123-16"><a href="#cb123-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Add polynomial regression line</span></span>
+<span id="cb123-17"><a href="#cb123-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate a sequence of values for rawpoll_trump for the polynomial line</span></span>
+<span id="cb123-18"><a href="#cb123-18" aria-hidden="true" tabindex="-1"></a>new_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">rawpoll_trump =</span> <span class="fu">seq</span>(<span class="fu">min</span>(raw_polls<span class="sc">$</span>rawpoll_trump), <span class="fu">max</span>(raw_polls<span class="sc">$</span>rawpoll_trump), <span class="at">length.out=</span><span class="dv">100</span>))</span>
+<span id="cb123-19"><a href="#cb123-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Predict the values of rawpoll_clinton for the generated sequence</span></span>
+<span id="cb123-20"><a href="#cb123-20" aria-hidden="true" tabindex="-1"></a>poly_pred <span class="ot">&lt;-</span> <span class="fu">predict</span>(fit2, new_data)</span>
+<span id="cb123-21"><a href="#cb123-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Add the polynomial regression line to the plot</span></span>
+<span id="cb123-22"><a href="#cb123-22" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(new_data<span class="sc">$</span>rawpoll_trump, poly_pred, <span class="at">col=</span><span class="st">'blue'</span>, <span class="at">lwd=</span><span class="dv">2</span>)</span>
+<span id="cb123-23"><a href="#cb123-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb123-24"><a href="#cb123-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Add a legend to differentiate the lines</span></span>
+<span id="cb123-25"><a href="#cb123-25" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">"topright"</span>, <span class="at">legend=</span><span class="fu">c</span>(<span class="st">"Linear Fit"</span>, <span class="st">"Polynomial Fit (degree 2)"</span>), <span class="at">col=</span><span class="fu">c</span>(<span class="st">"red"</span>, <span class="st">"blue"</span>), <span class="at">lwd=</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="coding-exercise_files/figure-html/unnamed-chunk-55-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>*************************Conclusion******************************* There exists a week positive relationship between the raw poll numbers for Trump and Clinton. There maybe other possible factors other than Trump’s poll numbers play a more significant role in determing Clinton’s poll numbers.</p>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
