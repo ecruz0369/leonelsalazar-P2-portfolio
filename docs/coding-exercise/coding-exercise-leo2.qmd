@@ -443,7 +443,6 @@ summary(raw_polls)
 ## Plotting
 ### Adjusted Poll as a Function for Trump & Clinton
 
-Eddies Graphs Calculation Keep and delete the one prior
 ```{r}
 # Perform linear regression
 regression = lm(adjusted_polls$adjpoll_clinton ~ adjusted_polls$adjpoll_trump)
@@ -478,7 +477,7 @@ text(47, 54, bquote(.(rsq_str) * .(r_square)), cex=0.75)
 abline(regression, col='darkblue', lwd=1.75)
 ```
 ### Raw Polls as a Function for Trump & Clinton
-Eddies graph Keep delete prior
+
 ```{r}
 # Perform linear regression
 regression = lm(raw_polls$rawpoll_clinton ~ raw_polls$rawpoll_trump)
@@ -513,7 +512,7 @@ text(47, 53, bquote(.(rsq_str) * .(r_square)), cex=0.75)
 abline(regression, col='darkblue', lwd=1.75)
 ```
 ****************************interpret the clinton and trump raw results************************************************
-
+There exists a positive correlation: the slight positive correlation between Trumps and Clinton's poll numbers, meaning that as Trump's poll numbers increase, Clinton's poll numbers tend to increase slightly as well. The low R^2(0.106) suggest that approximatley 10.6% of the variation in Clinton's poll numbers can be explained by Trumps poll numbers. Indicative of a week positive realtionship between two variables. 
 #Additional Data Processing to determine any missing data or NA
 #None Found
 ```{r}
@@ -631,7 +630,8 @@ lines(new_data$rawpoll_trump, poly_pred, col='blue', lwd=2)
 legend("topright", legend=c("Linear Fit", "Polynomial Fit (degree 2)"), col=c("red", "blue"), lwd=2)
 ```
 
-
+*************************Conclusion*******************************
+There exists a week positive relationship between the raw poll numbers for Trump and Clinton. There maybe other possible factors other than Trump's poll numbers play a more significant role in determing Clinton's poll numbers. 
 
 
 
