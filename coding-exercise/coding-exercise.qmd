@@ -3,3 +3,649 @@ title: "R Coding Exercise"
 ---
 
 Placeholder file for the future R coding exercise.
+
+
+## Loading and Checking Data
+### Import libraries
+
+```{r}
+library(dslabs) # to import dataset
+library(tidyverse) # data aggregation
+library(dplyr) # data aggregation? 
+data(gapminder)
+
+library(renv)
+
+
+```
+
+### Help Function
+```{r}
+help("gapminder")
+```
+
+### Data Structure Overview
+```{r}
+str(gapminder)
+```
+### Data Summary
+```{r}
+summary(gapminder)
+```
+### Class Functions - Object Determination
+```{r}
+class(gapminder)
+```
+## Processing Data
+### Assign only African countries to a new object/variable.
+```{r}
+africadata = filter(gapminder, continent == 'Africa')
+head(africadata)
+```
+### Africa Data Structure Overview
+```{r}
+str(africadata)
+```
+### Africa Summary
+```{r}
+summary(africadata)
+```
+### African Infant Mortality Object
+```{r}
+infant_survival_rate = africadata %>%
+  select(infant_mortality, life_expectancy)
+head(infant_survival_rate)
+```
+
+### African Infant Mortality Data Structure
+```{r}
+str(infant_survival_rate)
+```
+### African Infant Mortality Data Summary
+```{r}
+summary(infant_survival_rate)
+```
+### African Mortality Object
+```{r}
+african_mortality = africadata %>%
+  select(population, life_expectancy)
+head(african_mortality)
+```
+
+### African Mortality Data Structure
+```{r}
+str(african_mortality)
+```
+### African Mortality Data Summary
+```{r}
+summary(african_mortality)
+```
+## Plotting
+### Life Expectancy as a Function of Infant Mortality
+```{r}
+regression = lm(infant_survival_rate$life_expectancy ~ infant_survival_rate$infant_mortality)
+rsq <- function(x, y) summary(lm(infant_survival_rate$life_expectancy ~ infant_survival_rate$infant_mortality))$r.squared
+r_square = round(rsq(obs, mod), 3)
+# summary(regression)$coefficients - keep to sanity check
+coeff = round(summary(regression)$coefficients[2],3)
+y_int = round(summary(regression)$coefficients[1],3)
+plot(
+  infant_survival_rate$infant_mortality,
+  infant_survival_rate$life_expectancy,
+  main='African Life Expectancy \n Infant Mortality Effect',
+  xlab='Infant Mortality',
+  ylab='Life Expectancy',
+   col='lightblue', 
+   bg='black', 
+   pch = 21,
+)
+# rsq_str = expression(paste("r"^"2:"))
+rsq_str = "r2: "
+text(175, 75, paste0('y = ', coeff, 'x + ', y_int), cex=0.75)
+text(170, 70, paste0(rsq_str, r_square), cex=0.75)
+abline(
+  lm(
+    infant_survival_rate$life_expectancy ~ infant_survival_rate$infant_mortality),
+  col='red',
+  lwd=1.75)
+```
+### Life Expectancy as a Function of Population
+```{r}
+regression = lm(african_mortality$life_expectancy ~ african_mortality$population)
+rsq <- function(x, y) summary(lm(african_mortality$life_expectancy ~ african_mortality$population))$r.squared
+r_square = round(rsq(obs, mod), 3)
+# summary(regression)$coefficients - keep to sanity check
+coeff = round(summary(regression)$coefficients[2],9)
+y_int = round(summary(regression)$coefficients[1],3)
+plot(
+  african_mortality$population,
+  african_mortality$life_expectancy,
+  main='African Life Expectancy \n Population Effect',
+  xlab='Population',
+  ylab='Life Expectancy',
+  col='blue', 
+  bg='lightblue', 
+  pch = 21,
+)
+# rsq_str = expression(paste("r"^"2:"))
+rsq_str = "r2: "
+text(155000000, 75, paste0('y = ', coeff, 'x + ', y_int), cex=0.75)
+text(155000000, 70, paste0(rsq_str, r_square), cex=0.75)
+abline(
+lm(
+  african_mortality$life_expectancy ~ african_mortality$population),
+col='black',
+lwd=1.75)
+```
+
+ The graph attempts to demonstrate that relationship between Population increase and life expectancy overcoming life expectancy with a low R^2 is not dependent on life expectancy but possibly resulting from the strongest will survive and improving healthcare accessibility, GDP-gross domestic product, education and food source successfully allowing those Africans to survive and continue.  
+## More Data Processing
+### Missing Years For Infant Mortality Data
+```{r}
+miss_inf_mort_rows = africadata %>%
+  filter(is.na(infant_mortality))
+head(miss_inf_mort_rows)
+```
+
+### Perform Year Groupby to Identify Distinct Missing Years
+```{r}
+miss_inf_mort_yrs = miss_inf_mort_rows %>%
+  group_by(year) %>%
+  count(infant_mortality)
+miss_inf_mort_yrs
+```
+
+### Extract Only Year 2000 From africadata As New Object
+```{r}
+africadata2000 = filter(africadata, year == 2000)
+africadata2000
+```
+### africadata2000 Data Structure
+```{r}
+str(africadata2000)
+```
+### africadata2000 Data Summary
+```{r}
+summary(africadata2000)
+```
+
+## More Plotting
+### Create The Same Plots For africadata2000 Object
+#### Filter New Object to Create Graph Datasets (1/2)
+```{r}
+african_mortality2000 = africadata2000 %>%
+  select(population, life_expectancy)
+head(african_mortality2000)
+```
+#### Filter New Object to Create Graph Datasets (2/2)
+```{r}
+infant_survival_rate2000 = africadata2000 %>%
+  select(infant_mortality, life_expectancy)
+head(african_mortality2000)
+```
+
+
+#### Infant Mortality Effect
+```{r}
+regression = lm(infant_survival_rate2000$life_expectancy ~ infant_survival_rate2000$infant_mortality)
+rsq <- function(x, y) summary(lm(infant_survival_rate2000$life_expectancy ~ infant_survival_rate2000$infant_mortality))$r.squared
+r_square = round(rsq(obs, mod), 3)
+# summary(regression)$coefficients - keep to sanity check
+coeff = round(summary(regression)$coefficients[2],3)
+y_int = round(summary(regression)$coefficients[1],3)
+plot(
+  infant_survival_rate2000$infant_mortality,
+  infant_survival_rate2000$life_expectancy,
+  main='African Life Expectancy \n Infant Mortality Effect',
+  xlab='Infant Mortality',
+  ylab='Life Expectancy',
+   col='blue', 
+   bg='lightblue', 
+   pch = 21,
+)
+# rsq_str = expression(paste("r"^"2:"))
+rsq_str = "r2: "
+text(130, 75, paste0('y = ', coeff, 'x + ', y_int), cex=0.75)
+text(130, 73, paste0(rsq_str, r_square), cex=0.75)
+abline(
+  lm(
+    infant_survival_rate2000$life_expectancy ~ infant_survival_rate2000$infant_mortality),
+  col='black',
+  lwd=1.75)
+```
+
+#### Population Effect
+```{r}
+regression = lm(african_mortality2000$life_expectancy ~ african_mortality2000$population)
+rsq <- function(x, y) summary(lm(african_mortality2000$life_expectancy ~ african_mortality2000$population))$r.squared
+r_square = round(rsq(obs, mod), 3)
+# summary(regression)$coefficients - keep to sanity check
+coeff = round(summary(regression)$coefficients[2],9)
+y_int = round(summary(regression)$coefficients[1],3)
+plot(
+  african_mortality2000$population,
+  african_mortality2000$life_expectancy,
+  main='African Life Expectancy \n Population Effect',
+  xlab='Population',
+  ylab='Life Expectancy',
+  col='blue', 
+  bg='lightblue', 
+  pch = 21,
+)
+# rsq_str = expression(paste("r"^"2:"))
+rsq_str = "r2: "
+text(110000000, 75, paste0('y = ', coeff, 'x + ', y_int), cex=0.75)
+text(110000000, 73, paste0(rsq_str, r_square), cex=0.75)
+abline(
+lm(
+  african_mortality2000$life_expectancy ~ african_mortality2000$population),
+col='black',
+lwd=1.75)
+```
+
+## Simple Model Fits
+### Fit Life Expectancy to Infant Mortality
+```{r}
+fit1 = lm(infant_survival_rate2000$life_expectancy ~ infant_survival_rate2000$infant_mortality)
+summary(fit1)
+```
+### Fit Life Expectancy to Population
+```{r}
+fit2 = lm(african_mortality2000$life_expectancy ~ african_mortality2000$population)
+summary(fit2)
+```
+#### Conclusion
+The African population and life expectancy analysis shows no significant relationship between population size and life expectancy in African countries according to this linear model. The very low R-squared value indicates that population size explains only a tiny fraction of the variation in life expectancy. This suggests that other factors, such as healthcare access, economic conditions, education, and other social determinants, are likely much more important in explaining differences in life expectancy across African countries. TO reiterate, there is tremendous suffering and mortality with the children of the populations however the resiliency of this country has been successfully documented indicating the economics, education and healthcare is improving to continue allowing the population with access to these areas to successfully prosper and survive. 
+
+
+
+
+
+
+************************************This section added by Eddie Cruz *************************************
+```{r}
+fit1 = lm(life_expectancy ~ log(infant_mortality), data=infant_survival_rate2000)
+summary(fit1)
+```
+```{r}
+# Linear regression
+fit1 = lm(life_expectancy ~ infant_mortality, data=infant_survival_rate2000)
+summary(fit1)
+
+# Polynomial regression of degree 2
+fit2 = lm(life_expectancy ~ poly(infant_mortality, 2), data=infant_survival_rate2000)
+summary(fit2)
+
+# Plotting
+plot(
+  infant_survival_rate2000$infant_mortality,
+  infant_survival_rate2000$life_expectancy,
+  main='Infant Mortality vs Life Expectancy',
+  xlab='Infant Mortality',
+  ylab='Life Expectancy',
+  col='aquamarine',
+  pch=19
+)
+
+# Add linear regression line
+abline(fit1, col='darkblue')
+
+# Add polynomial regression line
+new_data <- data.frame(infant_mortality = seq(min(infant_survival_rate2000$infant_mortality), max(infant_survival_rate2000$infant_mortality), length.out=100))
+lines(new_data$infant_mortality, predict(fit2, new_data), col='cornflowerblue')
+
+```
+
+```{r}
+# Logarithmic regression
+fit2 = lm(life_expectancy ~ log(population), data=african_mortality2000)
+summary(fit2)
+
+```
+
+```{r}
+# Linear regression
+fit1 = lm(life_expectancy ~ population, data=african_mortality2000)
+summary(fit1)
+
+# Polynomial regression of degree 2
+fit2 = lm(life_expectancy ~ poly(population, 2), data=african_mortality2000)
+summary(fit2)
+
+# Plotting
+plot(
+  african_mortality2000$population,
+  african_mortality2000$life_expectancy,
+  main='Population vs Life Expectancy',
+  xlab='Population',
+  ylab='Life Expectancy',
+  col='aquamarine',
+  pch=19
+)
+
+# Add linear regression line
+abline(fit1, col='darkblue')
+
+# Add polynomial regression line
+new_data <- data.frame(population = seq(min(african_mortality2000$population), 
+                                        max(african_mortality2000$population), length.out=100))
+lines(new_data$population, predict(fit2, new_data), col='cornflowerblue')
+
+# Add a legend to differentiate the lines
+legend("topright", legend=c("Linear Fit", "Polynomial Fit (degree 2)"), col=c("darkblue", "cornflowerblue"), lwd=2)
+```
+
+
+
+
+************************ Edward Cruz contributed this portion ******************************************
+
+
+### Help Function
+```{r}
+help("polls_us_election_2016")
+```
+
+### Data Structure Overview
+```{r}
+str(polls_us_election_2016)
+```
+
+
+
+### Data Summary
+```{r}
+summary(polls_us_election_2016)
+```
+### Class Functions - Object Determination
+```{r}
+class(polls_us_election_2016)
+```
+
+### View data set 
+```{r}
+view(polls_us_election_2016)
+```
+
+## Processing Data
+### Assign only U.S. to a new object/variable.
+```{r}
+vote_data = filter(polls_us_election_2016,  state == 'U.S.')
+head(vote_data)
+```
+
+
+### U.S. Data Structure Overview
+```{r}
+str(vote_data)
+```
+
+### U.S. Summary
+```{r}
+summary(vote_data)
+```
+### Adjusted Poll Object
+```{r}
+adjusted_polls = vote_data %>%
+  select(adjpoll_clinton,adjpoll_trump )
+head(adjusted_polls)
+```
+### Adjusted Poll Data Structure
+```{r}
+str(adjusted_polls)
+```
+### Adjusted Poll Data Summary
+```{r}
+summary(adjusted_polls)
+```
+### Raw Poll Object
+```{r}
+raw_polls = vote_data %>%
+  select(rawpoll_clinton,rawpoll_trump )
+head(raw_polls)
+```
+### Raw Poll Data Structure
+```{r}
+str(raw_polls)
+```
+### Raw Poll Data Summary
+```{r}
+summary(raw_polls)
+```
+## Plotting
+### Adjusted Poll as a Function for Trump & Clinton
+
+```{r}
+# Perform linear regression
+regression = lm(adjusted_polls$adjpoll_clinton ~ adjusted_polls$adjpoll_trump)
+
+# Function to calculate R-squared
+rsq <- function() summary(regression)$r.squared
+r_square = round(rsq(), 3)
+
+# Get regression coefficients
+coeff = round(summary(regression)$coefficients[2, 1], 3)
+y_int = round(summary(regression)$coefficients[1, 1], 3)
+
+# Create plot
+plot(
+  adjusted_polls$adjpoll_trump,
+  adjusted_polls$adjpoll_clinton,
+  main='Adjusted Polls Trump & Clinton',
+  xlab='Adjusted Trump Poll',
+  ylab='Adjusted Clinton Poll',
+  col='lightgreen',
+  bg='olivedrab3',
+  pch = 21
+)
+
+# Add regression equation and R-squared value to the plot
+rsq_str = expression(paste("R"^2, ": "))
+rsq_str = "r2: "
+text(47, 55, paste0('y = ', coeff, 'x + ', y_int), cex=0.75)
+text(47, 54, bquote(.(rsq_str) * .(r_square)), cex=0.75)
+
+# Add regression line
+abline(regression, col='darkblue', lwd=1.75)
+```
+### Raw Polls as a Function for Trump & Clinton
+
+```{r}
+# Perform linear regression
+regression = lm(raw_polls$rawpoll_clinton ~ raw_polls$rawpoll_trump)
+
+# Function to calculate R-squared
+rsq <- function() summary(regression)$r.squared
+r_square = round(rsq(), 3)
+
+# Get regression coefficients
+coeff = round(summary(regression)$coefficients[2, 1], 9)
+y_int = round(summary(regression)$coefficients[1, 1], 3)
+
+# Create plot
+plot(
+  raw_polls$rawpoll_trump,
+  raw_polls$rawpoll_clinton,
+  main='Raw Polls Trump & Clinton',
+  xlab='Raw Trump Poll',
+  ylab='Raw Clinton Poll',
+  col='lightgreen',
+  bg='olivedrab3',
+  pch = 21
+)
+
+# Add regression equation and R-squared value to the plot
+rsq_str = expression(paste("R"^2, ": "))
+rsq_str = "r2: "
+text(47, 55, paste0('y = ', coeff, 'x + ', y_int), cex=0.75)
+text(47, 53, bquote(.(rsq_str) * .(r_square)), cex=0.75)
+
+# Add regression line
+abline(regression, col='darkblue', lwd=1.75)
+```
+****************************interpret the clinton and trump raw results************************************************
+There exists a positive correlation: the slight positive correlation between Trumps and Clinton's poll numbers, meaning that as Trump's poll numbers increase, Clinton's poll numbers tend to increase slightly as well. The low R^2(0.106) suggest that approximatley 10.6% of the variation in Clinton's poll numbers can be explained by Trumps poll numbers. Indicative of a week positive realtionship between two variables. 
+#Additional Data Processing to determine any missing data or NA
+#None Found
+```{r}
+miss_adj_polls=vote_data%>%
+  filter(is.na(adjpoll_clinton))
+head(miss_adj_polls)
+```
+#Additional Data Processing to determine any missing data or NA
+#None Found 
+```{r}
+miss_adj_polls=vote_data%>%
+  filter(is.na(adjpoll_trump))
+head(miss_adj_polls)
+```
+
+
+
+
+```{r}
+miss_raw_polls=vote_data%>%
+  filter(is.na(rawpoll_clinton))
+head(miss_raw_polls)
+```
+
+
+
+```{r}
+miss_raw_polls=vote_data%>%
+  filter(is.na(rawpoll_trump))
+head(miss_raw_polls)
+```
+
+Fit Adjusted Poll for Clinton and Trump
+```{r}
+#Log Regression
+fit1 = lm(adjpoll_clinton ~ log(adjpoll_trump), data=adjusted_polls)
+summary(fit1)
+```
+
+```{r}
+# Linear regression
+fit1 = lm(adjpoll_clinton ~ adjpoll_trump, data=adjusted_polls)
+summary(fit1)
+
+# Polynomial regression of degree 2
+fit2 = lm(adjpoll_clinton ~ poly(adjpoll_trump, 2), data=adjusted_polls)
+summary(fit2)
+
+# Plot the data
+plot(
+  adjusted_polls$adjpoll_trump,
+  adjusted_polls$adjpoll_clinton,
+  main='Adjusted Polls: Linear and Polynomial Regression',
+  xlab='adjpoll_trump',
+  ylab='adjpoll_clinton',
+  col='lightgreen',
+  bg='olivedrab3',
+  pch = 21
+)
+
+# Add linear regression line
+abline(fit1, col='red', lwd=2)
+
+# Add polynomial regression line
+# Generate a sequence of values for adjpoll_trump for the polynomial line
+new_data <- data.frame(adjpoll_trump = seq(min(adjusted_polls$adjpoll_trump), max(adjusted_polls$adjpoll_trump), length.out=100))
+# Predict the values of adjpoll_clinton for the generated sequence
+poly_pred <- predict(fit2, new_data)
+# Add the polynomial regression line to the plot
+lines(new_data$adjpoll_trump, poly_pred, col='blue', lwd=2)
+
+# Add a legend to differentiate the lines
+legend("topright", legend=c("Linear Fit", "Polynomial Fit (degree 2)"), col=c("red", "blue"), lwd=2)
+```
+### Fit Raw Poll 
+```{r}
+#Log Regression
+fit2 = lm(rawpoll_clinton ~ log(rawpoll_trump), data=vote_data)
+summary(fit2)
+
+```
+```{r}
+# Linear regression
+fit1 = lm(rawpoll_clinton ~ rawpoll_trump, data=raw_polls)
+summary(fit1)
+
+# Polynomial regression of degree 2
+fit2 = lm(rawpoll_clinton ~ poly(rawpoll_trump, 2), data=raw_polls)
+summary(fit2)
+
+# Plot the data
+plot(
+  raw_polls$rawpoll_trump,
+  raw_polls$rawpoll_clinton,
+  main='Raw Polls: Linear and Polynomial Regression',
+  xlab='rawpoll_trump',
+  ylab='rawpoll_clinton',
+  col='lightgreen',
+  bg='olivedrab3',
+  pch = 21
+)
+
+# Add linear regression line
+abline(fit1, col='red', lwd=2)
+
+# Add polynomial regression line
+# Generate a sequence of values for rawpoll_trump for the polynomial line
+new_data <- data.frame(rawpoll_trump = seq(min(raw_polls$rawpoll_trump), max(raw_polls$rawpoll_trump), length.out=100))
+# Predict the values of rawpoll_clinton for the generated sequence
+poly_pred <- predict(fit2, new_data)
+# Add the polynomial regression line to the plot
+lines(new_data$rawpoll_trump, poly_pred, col='blue', lwd=2)
+
+# Add a legend to differentiate the lines
+legend("topright", legend=c("Linear Fit", "Polynomial Fit (degree 2)"), col=c("red", "blue"), lwd=2)
+```
+
+*************************Conclusion*******************************
+There exists a week positive relationship between the raw poll numbers for Trump and Clinton. There maybe other possible factors other than Trump's poll numbers play a more significant role in determing Clinton's poll numbers. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
