@@ -1,0 +1,272 @@
+---
+title: "loading/cleaning/wrangling/exploring"
+author: "Edward Cruz"
+format: docx
+---
+
+```{r}
+library(readxl)
+#update.packages("tidyverse")
+library(tidyverse)
+#update.packages("dplyr")
+library(dplyr)
+#update.packages('mgcv')
+library(mgcv)
+```
+
+```{r}
+# Output cleaned data file to a csv file.
+DthCount_data <- read.csv("C:/Users/ecruz/OneDrive/Documents/UTSA - Data Science Program/Semester Classes/Practicum II Repository/P2-Practicum-II-Portfolio-EdwardCruz/cdcdata-exercise/Weekly_DeathCounts.csv", header = FALSE, stringsAsFactors = FALSE)
+```
+
+```{r}
+head(DthCount_data)
+```
+
+```{r}
+str(DthCount_data)
+```
+
+```{r}
+summary(DthCount_data)
+```
+
+```{r}
+view(DthCount_data)
+```
+
+```{r}
+# Merge the first two rows to create a proper header
+header <- DthCount_data[1:2, ]
+header <- sapply(header, function(x) paste(na.omit(x), collapse = " "))
+colnames(DthCount_data) <- header
+head(header)
+```
+
+```{r}
+# Remove the first row (header rows) and any completely blank rows
+DthCount_cleaned <- DthCount_data[-c(1,1), ]
+head(DthCount_cleaned)
+```
+
+```{r}
+view(DthCount_cleaned)
+```
+
+```{r}
+# Assuming DthCount_cleaned is your cleaned data frame
+colnames(DthCount_cleaned) <- c("Jurisdiction", "Week_Ending_Date", "State", "Year", "Week","Cause","Death_Count","Cause_Subgroup","Period","Suppress","Note","Avg_No_Deaths","Variance_2015_2019_2020", "Perc_Diff_2015_2019_2020","Types")
+```
+
+```{r}
+head(DthCount_cleaned)
+```
+
+```{r}
+# Convert specified columns to numeric
+DthCount2_cleaned <- DthCount_cleaned %>%
+  mutate(across(c("Year", "Week", "Death_Count", "Avg_No_Deaths", "Variance_2015_2019_2020", "Perc_Diff_2015_2019_2020"), as.numeric))
+```
+
+```{r}
+str(DthCount2_cleaned)
+```
+
+```{r}
+head(DthCount2_cleaned)
+```
+
+```{r}
+# Write the cleaned data to a new CSV file
+write.csv(DthCount2_cleaned, "C:/Users/ecruz/OneDrive/Documents/UTSA - Data Science Program/Semester Classes/Practicum II Repository/P2-Practicum-II-Portfolio-EdwardCruz/cdcdata-exercise/DthCount2_cleaned.csv", row.names = FALSE)
+```
+
+```{r}
+DthCount3_cleaned <- DthCount2_cleaned %>% select(-Suppress,-Note,-Types)
+
+```
+
+```{r}
+view(DthCount3_cleaned)
+```
+
+```{r}
+ggplot(DthCount3_cleaned, aes(Death_Count)) + geom_histogram()
+```
+
+```{r}
+ggplot(DthCount3_cleaned, aes(x = Avg_No_Deaths)) +
+  geom_histogram(binwidth = 950, fill = "blue", color = "black") +
+  labs(title = "Histogram of Death Count",
+       x = "Average Number of Deaths",
+       y = "Frequency")
+```
+
+```{r}
+# Example scatter plot of two variables
+ggplot(DthCount3_cleaned, aes(x = Death_Count, y = Avg_No_Deaths)) +
+  geom_point() +
+  labs(title = "Scatter Plot",
+       x = "Deaths",
+       y = "Average Number of Deaths")
+```
+
+```{r}
+# Enhanced scatter plot of two variables
+ggplot(DthCount3_cleaned, aes(x = Death_Count, y = Avg_No_Deaths)) +
+  geom_point(color = "blue", size = 5, alpha = 0.6) +
+  geom_smooth(method = "lm", se = FALSE, color = "red", linetype = "dashed") +
+  labs(title = "Scatter Plot of Death Count vs Average Number of Deaths",
+       x = "Death Count",
+       y = "Average Number of Deaths") +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(hjust = 0.5),
+    axis.title = element_text(size = 12),
+    axis.text = element_text(size = 10)
+  )
+```
+
+```{r}
+# Bar chart of Death Count per Year
+ggplot(DthCount3_cleaned, aes(x = Year, y = Death_Count)) +
+  geom_bar(stat = "identity", outline = "black", color = "darkorange", alpha = .8) +
+  labs(title = "Bar Chart of Death Count Per Year",
+       x = "Year",
+       y = "Death Count") +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(hjust = 0.5),
+    axis.title = element_text(size = 12),
+    axis.text = element_text(size = 10)
+  )
+
+```
+
+```{r}
+# Write the cleaned data to a new CSV file
+write.csv(DthCount3_cleaned, "C:/Users/ecruz/OneDrive/Documents/UTSA - Data Science Program/Semester Classes/Practicum II Repository/P2-Practicum-II-Portfolio-EdwardCruz/cdcdata-exercise/DthCount3_cleaned.csv", row.names = FALSE)
+```
+
+
+```{r}
+# Assuming hcnydata_cleaned is your data frame
+DthCount3A_cleaned <- DthCount3_cleaned[apply(DthCount3_cleaned, 1, function(x) !all(is.na(x))), ]
+
+# Print the modified data frame to verify the changes
+head(DthCount3_cleaned)
+view(DthCount3_cleaned)
+
+```
+
+```{r}
+str(DthCount3A_cleaned)
+```
+
+```{r, message=FALSE}
+#update.packages('mgcv')
+library(mgcv)
+```
+
+```{r}
+# Convert the 'state' column to a factor
+DthCount3A_cleaned$State <- as.factor(DthCount3_cleaned$State)
+
+# Display the resulting data frame
+head(DthCount3_cleaned)
+```
+
+```{r}
+# Step 3: Reindex the rows starting from 1
+rownames(DthCount3A_cleaned) <- NULL
+```
+
+```{r}
+# Identify the rows to exclude
+#rows_to_exclude <- c(46)
+
+# Remove rows 45 to 52 while excluding row 46
+#data_hcny <- hcnydata_cleaned[-c(45:52)[-which(c(45:52) %in% rows_to_exclude)], ]
+```
+
+```{r}
+str(DthCount3A_cleaned)
+```
+
+```{r}
+library(ggplot2)
+
+# Bar chart of Death Count by State with skyblue fill and flipped coordinates
+ggplot(data = DthCount3A_cleaned, aes(x = State, y = Death_Count)) +
+  geom_bar(stat = "identity", fill = "darkblue") +
+  labs(title = "Varroa Mites by State",
+       x = "State",
+       y = "Death Count") +
+  theme_minimal() +
+  coord_flip() +
+  theme(
+    axis.text.x = element_text(size = 12),  # Adjust the size as needed
+    plot.title = element_text(hjust = 0.5),
+    axis.title = element_text(size = 12),
+    axis.text.y = element_text(size = 10)
+  )
+
+
+```
+
+# Remove all rows with any NA values
+
+```{r}
+
+library(tidyr)
+
+
+DeathCnt_data <- DthCount3A_cleaned %>% drop_na()
+
+# Verify that NAs have been removed
+glimpse(DeathCnt_data)
+```
+
+# Bivariate Analysis
+
+```{r, message=FALSE, warning=FALSE}
+## Example of a bivariate plot between 'state' and 'varroa_mites'
+ggplot(DeathCnt_data, aes(x = State, y = Death_Count)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(title = "Death Count by State",
+       x = "State",
+       y = "Death Count")
+```
+
+```{r}
+DeathCntFinal_data<-DeathCnt_data
+```
+
+
+```{r}
+library(ggplot2)
+
+# Bar chart of Death Count by State with skyblue fill and flipped coordinates
+ggplot(data = DeathCntFinal_data, aes(x = State, y = Death_Count)) +
+  geom_bar(stat = "identity", fill = "darkblue") +
+  labs(title = "Varroa Mites by State",
+       x = "State",
+       y = "Death Count") +
+  theme_minimal() +
+  coord_flip() +
+  theme(
+    axis.text.x = element_text(size = 12),  # Adjust the size as needed
+    plot.title = element_text(hjust = 0.5),
+    axis.title = element_text(size = 12),
+    axis.text.y = element_text(size = 10)
+  )
+
+```
+
+```{r}
+# Write the cleaned data to a new CSV file
+write.csv(DeathCntFinal_data, "C:/Users/ecruz/OneDrive/Documents/UTSA - Data Science Program/Semester Classes/Practicum II Repository/P2-Practicum-II-Portfolio-EdwardCruz/cdcdata-exercise/DeathCntFinal_data.csv", row.names = FALSE)
+```
+
+################################Eddie Cruz #################################################################
